@@ -1,0 +1,214 @@
+{% extends "base.html" %}
+
+{% block title %}{{ t.ext_title }}{% endblock %}
+
+{% block content %}
+<div class="editorial-page-container">
+
+    <!-- 1. გვერდის მინიმალისტური ჰედერი -->
+    <header class="editorial-header">
+        <span class="editorial-subtitle">{{ t.ext_sub }}</span>
+        <h1 class="editorial-title">{{ t.ext_h1 }}</h1>
+        <p class="editorial-desc">{{ t.ext_desc }}</p>
+    </header>
+
+    <!-- 2. ჩვენი თმების პრემიუმ შოუკეისი -->
+    <section class="hair-categories-showcase">
+        <h2 class="section-art-title">{{ t.ext_showcase }}</h2>
+        <div class="hair-type-grid">
+            <div class="hair-type-card">
+                <div class="hair-mini-box">
+                    <img src="{{ url_for('static', filename='images/mask-3d.jpg') }}" alt="Slavyanka Premium">
+                </div>
+                <h3>SLAVYANKA LUXE</h3>
+            </div>
+            <div class="hair-type-card">
+                <div class="hair-mini-box">
+                    <img src="{{ url_for('static', filename='images/product-3.jpg') }}" alt="Italian Keratin">
+                </div>
+                <h3>ITALIAN ORGANIC</h3>
+            </div>
+            <div class="hair-type-card">
+                <div class="hair-mini-box">
+                    <img src="{{ url_for('static', filename='images/hero-bg.png') }}" alt="Single Donor">
+                </div>
+                <h3>SINGLE DONOR RAW</h3>
+            </div>
+            <div class="hair-type-card">
+                <div class="hair-mini-box">
+                    <img src="{{ url_for('static', filename='images/photo_1_2026-06-17_18-00-43.jpg') }}" alt="Virgin Blends">
+                </div>
+                <h3>VIRGIN BLENDS</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. ოთხი კაფსულის საგამომცემლო გრიდი -->
+    <section class="capsules-editorial-section">
+        <div class="capsules-art-grid">
+
+            <!-- კაფსულა 1: სტანდარტი -->
+            <div class="capsule-editorial-card">
+                <span class="capsule-card-title">CLASSIC STANDARD</span>
+                <div class="capsule-round-frame">
+                    <img src="{{ url_for('static', filename='images/mask-3d.jpg') }}" alt="Standard Capsule">
+                </div>
+
+                <div class="capsule-technical-meta">
+                    <div class="meta-spec-block">
+                        <h5>{{ t.meta_ideal }}</h5>
+                        <p>{{ t.cap1_ideal }}</p>
+                    </div>
+                    <div class="meta-spec-block">
+                        <h5>{{ t.meta_benefits }}</h5>
+                        <p>{{ t.cap1_benefits|safe }}</p>
+                    </div>
+                    <div class="meta-spec-block">
+                        <h5>{{ t.meta_technique }}</h5>
+                        <p>Classic Italian Micro-Bonding</p>
+                    </div>
+                    <div class="meta-spec-block">
+                        <h5>{{ t.meta_difficulty }}</h5>
+                        <div class="difficulty-dots">
+                            <span class="dot filled"></span>
+                            <span class="dot filled"></span>
+                            <span class="dot"></span>
+                        </div>
+                    </div>
+                    <div class="meta-spec-block">
+                        <h5>{{ t.meta_time }}</h5>
+                        <p>{{ t.cap1_time }}</p>
+                    </div>
+                    <div class="meta-spec-block">
+                        <h5>{{ t.meta_wear }}</h5>
+                        <p>{{ t.cap1_wear }}</p>
+                    </div>
+                </div>
+                <a href="{{ url_for('main.contact') }}" class="capsule-action-btn">{{ t.btn_consult }}</a>
+            </div>
+
+            <!-- კაფსულა 2: მიკრო -->
+            <div class="capsule-editorial-card">
+                <span class="capsule-card-title">PREMIUM MICRO</span>
+                <div class="capsule-round-frame">
+                    <img src="{{ url_for('static', filename='images/product-3.jpg') }}" alt="Micro Capsule">
+                </div>
+
+                <div class="capsule-technical-meta">
+                    <div class="meta-spec-block">
+                        <h5>{{ t.meta_ideal }}</h5>
+                        <p>{{ t.cap2_ideal }}</p>
+                    </div>
+                    <div class="meta-spec-block">
+                        <h5>{{ t.meta_benefits }}</h5>
+                        <p>{{ t.cap2_benefits|safe }}</p>
+                    </div>
+                    <div class="meta-spec-block">
+                        <h5>{{ t.meta_technique }}</h5>
+                        <p>Advanced Micro-Capsulation</p>
+                    </div>
+                    <div class="meta-spec-block">
+                        <h5>{{ t.meta_difficulty }}</h5>
+                        <div class="difficulty-dots">
+                            <span class="dot filled"></span>
+                            <span class="dot filled"></span>
+                            <span class="dot filled"></span>
+                        </div>
+                    </div>
+                    <div class="meta-spec-block">
+                        <h5>{{ t.meta_time }}</h5>
+                        <p>{{ t.cap2_time }}</p>
+                    </div>
+                    <div class="meta-spec-block">
+                        <h5>{{ t.meta_wear }}</h5>
+                        <p>{{ t.cap2_wear }}</p>
+                    </div>
+                </div>
+                <a href="{{ url_for('main.contact') }}" class="capsule-action-btn">{{ t.btn_consult }}</a>
+            </div>
+
+            <!-- კაფსულა 3: ნანო -->
+            <div class="capsule-editorial-card">
+                <span class="capsule-card-title">ULTRA NANO</span>
+                <div class="capsule-round-frame">
+                    <img src="{{ url_for('static', filename='images/hero-bg.png') }}" alt="Nano Capsule">
+                </div>
+
+                <div class="capsule-technical-meta">
+                    <div class="meta-spec-block">
+                        <h5>{{ t.meta_ideal }}</h5>
+                        <p>{{ t.cap3_ideal }}</p>
+                    </div>
+                    <div class="meta-spec-block">
+                        <h5>{{ t.meta_benefits }}</h5>
+                        <p>{{ t.cap3_benefits|safe }}</p>
+                    </div>
+                    <div class="meta-spec-block">
+                        <h5>{{ t.meta_technique }}</h5>
+                        <p>Nano-Tech Precision Fusion</p>
+                    </div>
+                    <div class="meta-spec-block">
+                        <h5>{{ t.meta_difficulty }}</h5>
+                        <div class="difficulty-dots">
+                            <span class="dot filled"></span>
+                            <span class="dot filled"></span>
+                            <span class="dot filled"></span>
+                        </div>
+                    </div>
+                    <div class="meta-spec-block">
+                        <h5>{{ t.meta_time }}</h5>
+                        <p>{{ t.cap3_time }}</p>
+                    </div>
+                    <div class="meta-spec-block">
+                        <h5>{{ t.meta_wear }}</h5>
+                        <p>{{ t.cap3_wear }}</p>
+                    </div>
+                </div>
+                <a href="{{ url_for('main.contact') }}" class="capsule-action-btn">{{ t.btn_consult }}</a>
+            </div>
+
+            <!-- კაფსულა 4: ღეროვანი -->
+            <div class="capsule-editorial-card">
+                <span class="capsule-card-title">{{ t.cap4_title }}</span>
+                <div class="capsule-round-frame">
+                    <img src="{{ url_for('static', filename='images/photo_1_2026-06-17_18-00-43.jpg') }}" alt="Stem Capsule">
+                </div>
+
+                <div class="capsule-technical-meta">
+                    <div class="meta-spec-block">
+                        <h5>{{ t.meta_ideal }}</h5>
+                        <p>{{ t.cap4_ideal }}</p>
+                    </div>
+                    <div class="meta-spec-block">
+                        <h5>{{ t.meta_benefits }}</h5>
+                        <p>{{ t.cap4_benefits|safe }}</p>
+                    </div>
+                    <div class="meta-spec-block">
+                        <h5>{{ t.meta_technique }}</h5>
+                        <p>Milton Piece-by-Piece Custom Design</p>
+                    </div>
+                    <div class="meta-spec-block">
+                        <h5>{{ t.meta_difficulty }}</h5>
+                        <div class="difficulty-dots">
+                            <span class="dot filled"></span>
+                            <span class="dot filled"></span>
+                            <span class="dot filled"></span>
+                        </div>
+                    </div>
+                    <div class="meta-spec-block">
+                        <h5>{{ t.meta_time }}</h5>
+                        <p>{{ t.cap4_time }}</p>
+                    </div>
+                    <div class="meta-spec-block">
+                        <h5>{{ t.meta_wear }}</h5>
+                        <p>{{ t.cap4_wear }}</p>
+                    </div>
+                </div>
+                <a href="{{ url_for('main.contact') }}" class="capsule-action-btn">{{ t.btn_consult }}</a>
+            </div>
+
+        </div>
+    </section>
+
+</div>
+{% endblock %}

@@ -1,0 +1,196 @@
+{% extends "base.html" %}
+
+{% block title %}{{ t.ct_title }}{% endblock %}
+
+{% block content %}
+<style>
+    .contact-editorial-wrapper {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        gap: 50px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        margin-top: 40px;
+    }
+
+    .contact-details-side {
+        width: 45% !important;
+        flex-shrink: 0 !important;
+    }
+
+    .contact-form-side {
+        width: 50% !important;
+        flex-shrink: 0 !important;
+    }
+
+    /* 🗺️ Landscape რუკა — მთელ სიგანეზე, ქვემოთ */
+    .contact-map-landscape {
+        width: 100%;
+        margin-top: 60px;
+    }
+
+    .studio-meta-block {
+        margin-bottom: 40px;
+    }
+
+    .studio-meta-block h2 {
+        font-family: var(--font-serif, 'Playfair Display', serif);
+        font-size: 26px;
+        font-weight: 400;
+        margin-bottom: 20px;
+        color: var(--text-dark, #1A1A1A);
+    }
+
+    .studio-meta-block p {
+        font-size: 15px;
+        color: #444444;
+        margin-bottom: 12px;
+        font-weight: 300;
+    }
+
+    .luxury-contact-form {
+        display: flex;
+        flex-direction: column;
+        gap: 35px;
+    }
+
+    .form-line-group {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .form-line-group label {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        font-weight: 500;
+        color: var(--text-dark, #1A1A1A);
+    }
+
+    .form-line-group input,
+    .form-line-group textarea {
+        border: none !important;
+        border-bottom: 1px solid #DCD9D2 !important;
+        background-color: transparent !important;
+        padding: 10px 0 !important;
+        font-size: 14px !important;
+        font-family: var(--font-sans, sans-serif) !important;
+        color: var(--text-dark, #1A1A1A) !important;
+        outline: none !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    .form-line-group input:focus,
+    .form-line-group textarea:focus {
+        border-color: var(--gold-accent, #A98456) !important;
+    }
+
+    .btn-luxury-submit {
+        background-color: var(--text-dark, #1A1A1A);
+        color: #ffffff;
+        border: none;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: 12px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: 15px;
+        width: fit-content;
+        padding: 16px 40px;
+    }
+
+    .btn-luxury-submit:hover {
+        background-color: var(--gold-accent, #A98456);
+    }
+
+    .map-container-box {
+        width: 100%;
+        height: 420px;
+        background-color: #F7F4EE;
+        border: 1px solid #ECE9E2;
+        padding: 15px;
+        box-sizing: border-box;
+    }
+
+    /* მობილურებზე ჩამოწყობა ერთ სვეტად */
+    @media (max-width: 768px) {
+        .contact-editorial-wrapper {
+            flex-direction: column !important;
+            gap: 40px !important;
+        }
+        .contact-details-side, .contact-form-side {
+            width: 100% !important;
+        }
+        .map-container-box {
+            height: 300px;
+        }
+    }
+</style>
+
+<div class="editorial-page-container">
+
+    <header class="editorial-header">
+        <span class="editorial-subtitle">{{ t.ct_sub }}</span>
+        <h1 class="editorial-title">{{ t.ct_h1 }}</h1>
+        <p class="editorial-desc">{{ t.ct_desc }}</p>
+    </header>
+
+    <div class="contact-editorial-wrapper">
+
+        <div class="contact-details-side">
+            <div class="studio-meta-block" style="margin-bottom: 0;">
+                <h2>Milton Studio Tbilisi</h2>
+                <p class="studio-address">{{ t.ct_address }}</p>
+                <p class="studio-phone"><a href="tel:+995322141300" style="color: inherit;">{{ t.ct_phone }}</a></p>
+                <p class="studio-email"><a href="mailto:miltontbilisi@gmail.com" style="color: inherit;">{{ t.ct_email }}</a></p>
+                <p class="studio-hours">{{ t.ct_hours }}</p>
+                <p class="studio-socials" style="display: flex; gap: 18px; margin-top: 18px;">
+                    <a href="https://www.instagram.com/miltontbilisi" target="_blank" rel="noopener" style="color: #1A1A1A; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; font-weight: 500; border-bottom: 1px solid #A98456;">Instagram</a>
+                    <a href="https://www.facebook.com/Miltontbilisi" target="_blank" rel="noopener" style="color: #1A1A1A; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; font-weight: 500; border-bottom: 1px solid #A98456;">Facebook</a>
+                </p>
+            </div>
+        </div>
+
+        <div class="contact-form-side">
+            <form class="luxury-contact-form" onsubmit="event.preventDefault(); alert('{{ t.ct_sent }}');">
+                <div class="form-line-group">
+                    <label for="clientName">{{ t.ct_name }}</label>
+                    <input type="text" id="clientName" placeholder="{{ t.ct_name_ph }}" required>
+                </div>
+
+                <div class="form-line-group">
+                    <label for="clientPhone">{{ t.ct_phone_l }}</label>
+                    <input type="tel" id="clientPhone" placeholder="{{ t.ct_phone_ph }}" required>
+                </div>
+
+                <div class="form-line-group">
+                    <label for="clientMessage">{{ t.ct_msg }}</label>
+                    <textarea id="clientMessage" rows="3" placeholder="{{ t.ct_msg_ph }}"></textarea>
+                </div>
+
+                <button type="submit" class="btn-luxury-submit">{{ t.ct_send }}</button>
+            </form>
+        </div>
+
+    </div>
+
+    <!-- Landscape რუკა მთელ სიგანეზე -->
+    <div class="contact-map-landscape">
+        <div class="map-container-box">
+           <!-- პინი ზუსტად Milton Tbilisi-ს ლოკაციაზე (maps.app.goo.gl/D9jrfttSsYzUfTVg7) -->
+           <iframe
+                src="https://maps.google.com/maps?q=41.7186678,44.7794461&z=17&hl={{ lang }}&output=embed"
+                width="100%"
+                height="100%"
+                style="border:0;"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+    </div>
+</div>
+{% endblock %}

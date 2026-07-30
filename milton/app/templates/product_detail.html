@@ -1,0 +1,168 @@
+{% extends "base.html" %}
+
+{% block title %}Milton Boutique | {{ product.name }}{% endblock %}
+
+{% block content %}
+<div class="editorial-detail-container">
+
+    <div class="luxury-product-showcase">
+
+        <div class="product-media-gallery">
+            <div class="main-display-box">
+                {% if product.is_video %}
+                <video autoplay loop muted playsinline class="gallery-main-media">
+                    <source src="{{ url_for('static', filename='images/' ~ product.image) }}" type="video/mp4">
+                </video>
+                {% else %}
+                <img src="{{ url_for('static', filename='images/' ~ product.image) }}" id="mainGalleryImg" class="gallery-main-media" alt="{{ product.name }}">
+                {% endif %}
+            </div>
+
+            <div class="thumbnails-track">
+                <div class="thumb-item active" onclick="changeDetailMedia(event, '{{ url_for('static', filename='images/' ~ product.image) }}', {{ 'true' if product.is_video else 'false' }})">
+                    {% if product.is_video %} 🎥 {% else %} <img src="{{ url_for('static', filename='images/' ~ product.image) }}" alt=""> {% endif %}
+                </div>
+                <div class="thumb-item" onclick="changeDetailMedia(event, '{{ url_for('static', filename='images/mask-3d.jpg') }}', false)">
+                    <img src="{{ url_for('static', filename='images/mask-3d.jpg') }}" alt="">
+                </div>
+                <div class="thumb-item" onclick="changeDetailMedia(event, '{{ url_for('static', filename='images/product-3.jpg') }}', false)">
+                    <img src="{{ url_for('static', filename='images/product-3.jpg') }}" alt="">
+                </div>
+            </div>
+        </div>
+
+        <div class="product-purchase-meta">
+            <span class="meta-brand-badge">{{ product.brand }}</span>
+            <h1 class="meta-product-title">{{ product.name }}</h1>
+            <p class="meta-product-subtitle">{{ product.sub[lang] }}</p>
+
+            <div class="product-expert-prescription">
+                <h3>{{ t.pd_prescription }}</h3>
+                <p>{{ product.desc[lang] }}</p>
+            </div>
+
+            <div class="purchase-action-row">
+                <div class="meta-price-row">
+                    <span class="meta-price-tag">{{ product.price }} ₾</span>
+                </div>
+
+                <div class="quantity-selector">
+                    <button type="button" class="qty-btn" onclick="changeQty(-1)">−</button>
+                    <input type="text" id="productQty" value="1" readonly>
+                    <button type="button" class="qty-btn" onclick="changeQty(1)">+</button>
+                </div>
+            </div>
+
+            <button class="btn-pro-view main-action-btn" id="addToCartBtn"
+                    data-id="{{ product.id }}" data-pname="{{ product.name }}" data-price="{{ product.price }}">{{ t.pd_add_cart }}</button>
+
+            <div class="editorial-accordion-group">
+                <div class="detail-accordion-item">
+                    <div class="accordion-trigger">{{ t.pd_usage }} <span>+</span></div>
+                    <div class="accordion-content">
+                        <p>{{ product.usage[lang] }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <section class="related-catalog-section">
+        <h3 class="related-section-title">{{ t.pd_related }}</h3>
+        <div class="pro-products-grid">
+            {% for rel in related %}
+            <div class="pro-product-card">
+                <div class="pro-img-wrapper">
+                    <a href="{{ url_for('main.product_detail', product_id=rel.id) }}">
+                        {% if rel.is_video %}
+                        <video autoplay loop muted playsinline class="pro-card-video">
+                            <source src="{{ url_for('static', filename='images/' ~ rel.image) }}" type="video/mp4">
+                        </video>
+                        {% else %}
+                        <img src="{{ url_for('static', filename='images/' ~ rel.image) }}" alt="{{ rel.name }}">
+                        {% endif %}
+                    </a>
+                </div>
+                <div class="pro-product-meta">
+                    <span class="pro-brand">{{ rel.brand }}</span>
+                    <a href="{{ url_for('main.product_detail', product_id=rel.id) }}" class="pro-title-link">
+                        <h4>{{ rel.name }}</h4>
+                    </a>
+                    <p class="pro-sub">{{ rel.sub[lang] }}</p>
+                    <div class="pro-card-bottom">
+                        <span class="pro-price">{{ rel.price }} ₾</span>
+                        <button class="btn-pro-view btn-add-cart-related"
+                                data-id="{{ rel.id }}" data-pname="{{ rel.name }}" data-price="{{ rel.price }}">{{ t.btn_cart }}</button>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+</div>
+
+<script>
+// გალერეის მედიის ცვლილება
+function changeDetailMedia(event, src, isVideo) {
+    const displayBox = document.querySelector('.main-display-box');
+    if (isVideo) {
+        displayBox.innerHTML = `<video autoplay loop muted playsinline class="gallery-main-media"><source src="${src}" type="video/mp4"></video>`;
+    } else {
+        displayBox.innerHTML = `<img src="${src}" class="gallery-main-media">`;
+    }
+    document.querySelectorAll('.thumb-item').forEach(item => item.classList.remove('active'));
+    event.currentTarget.classList.add('active');
+}
+
+// 🔢 რაოდენობის მართვის ლოგიკა
+function changeQty(amount) {
+    const qtyInput = document.getElementById('productQty');
+    let currentQty = parseInt(qtyInput.value);
+    currentQty += amount;
+    if (currentQty < 1) currentQty = 1;
+    qtyInput.value = currentQty;
+}
+
+// აკორდეონის გაღება
+document.querySelectorAll('.accordion-trigger').forEach(trigger => {
+    trigger.addEventListener('click', function() {
+        const item = this.parentElement;
+        const content = item.querySelector('.accordion-content');
+        const span = this.querySelector('span');
+
+        if (content.style.display === 'block') {
+            content.style.display = 'none';
+            span.textContent = '+';
+        } else {
+            content.style.display = 'block';
+            span.textContent = '−';
+        }
+    });
+});
+
+// კალათაში დამატება — drawer ავტომატურად იხსნება
+document.addEventListener("DOMContentLoaded", function() {
+    const addBtn = document.getElementById('addToCartBtn');
+    addBtn.addEventListener('click', function() {
+        const qty = parseInt(document.getElementById('productQty').value);
+        window.miltonAddToCart({
+            id: parseInt(this.dataset.id),
+            name: this.dataset.pname,
+            price: this.dataset.price
+        }, qty);
+    });
+
+    document.querySelectorAll('.btn-add-cart-related').forEach(btn => {
+        btn.addEventListener('click', function() {
+            window.miltonAddToCart({
+                id: parseInt(this.dataset.id),
+                name: this.dataset.pname,
+                price: this.dataset.price
+            }, 1);
+        });
+    });
+});
+</script>
+{% endblock %}

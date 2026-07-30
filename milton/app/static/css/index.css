@@ -1,0 +1,2534 @@
+/* ==========================================================================
+   MILTON - COMPLETE INDEX & EDITORIAL STYLES (Centre Marsea Inspired)
+   ========================================================================== */
+
+/* ─── გლობალური სქროლვა ─── */
+html {
+    scroll-behavior: smooth;
+}
+
+/* ─── მთავარი გვერდი: HERO სექცია (მოდელის ფოტო) ─── */
+.hero-section {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    background-image: url('/static/images/hero-bg.png'); /* შენი მოდელის ფოტო */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    padding-left: 10%;
+    box-sizing: border-box;
+}
+
+/* მუქი დახვეწილი გადაკვრა ფოტოზე, რომ ტექსტი იკითხებოდეს */
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.25) 100%);
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    color: #ffffff;
+    max-width: 650px;
+}
+
+.hero-subtitle {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold-accent, #A98456);
+    display: block;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.hero-title {
+    font-family: var(--font-serif, 'Playfair Display', serif);
+    font-size: 56px;
+    font-weight: 400;
+    line-height: 1.15;
+    margin-bottom: 25px;
+    color: #ffffff;
+}
+
+.hero-desc {
+    font-size: 15px;
+    color: #e0e0e0;
+    line-height: 1.8;
+    margin-bottom: 40px;
+    font-weight: 300;
+}
+
+/* პრემიუმ მინიმალისტური ღილაკები */
+.hero-buttons {
+    display: flex;
+    gap: 25px;
+}
+
+.btn-book {
+    display: inline-block;
+    padding: 16px 45px;
+    background-color: var(--gold-accent, #A98456);
+    color: #ffffff;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
+}
+
+.btn-book:hover {
+    background-color: #ffffff;
+    color: #1A1A1A;
+}
+
+.btn-services {
+    display: inline-block;
+    padding: 16px 45px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    color: #ffffff;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
+}
+
+.btn-services:hover {
+    border-color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* ─── მთავარი გვერდი: ფილოსოფიის სექცია ─── */
+.next-brand-section {
+    background-color: var(--bg-cream, #FDFBF7);
+    padding: 160px 8%;
+    text-align: center;
+}
+
+.brand-container {
+    max-width: 750px;
+    margin: 0 auto;
+}
+
+.section-num {
+    font-size: 11px;
+    color: var(--gold-accent, #A98456);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    display: block;
+    margin-bottom: 25px;
+    font-weight: bold;
+}
+
+.next-brand-section h2 {
+    font-family: var(--font-serif, 'Playfair Display', serif);
+    font-size: 42px;
+    font-weight: 400;
+    color: var(--text-dark, #1A1A1A);
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+}
+
+.next-brand-section p {
+    font-size: 16px;
+    color: #555555;
+    line-height: 1.9;
+    font-weight: 300;
+}
+
+/* ─── EDITORIAL ჩონჩხი (სერვისები, ფასები, თმის მოვლა) ─── */
+.editorial-page-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 160px 8% 80px 8%;
+}
+
+.editorial-header {
+    margin-bottom: 80px;
+    border-bottom: 1px solid #ECE9E2;
+    padding-bottom: 40px;
+}
+
+.editorial-subtitle {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--gold-accent, #A98456);
+    display: block;
+    margin-bottom: 15px;
+}
+
+.editorial-title {
+    font-family: var(--font-serif, 'Playfair Display', serif);
+    font-size: 46px;
+    font-weight: 400;
+    margin: 10px 0 20px 0;
+    letter-spacing: 1px;
+    color: var(--text-dark, #1A1A1A);
+}
+
+.editorial-desc {
+    font-size: 15px;
+    color: #7A7A7A;
+    max-width: 600px;
+    line-height: 1.8;
+}
+
+/* ─── სერვისების გვერდის სტილები ─── */
+.editorial-services-list {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+}
+
+.editorial-service-row {
+    display: flex;
+    gap: 40px;
+    border-bottom: 1px solid #ECE9E2;
+    padding-bottom: 40px;
+}
+
+.service-num {
+    font-family: var(--font-serif, 'Playfair Display', serif);
+    font-size: 24px;
+    color: var(--gold-accent, #A98456);
+    min-width: 50px;
+}
+
+.service-details h2 {
+    font-family: var(--font-serif, 'Playfair Display', serif);
+    font-size: 24px;
+    font-weight: 400;
+    margin: 0 0 15px 0;
+    color: var(--text-dark, #1A1A1A);
+}
+
+.service-details p {
+    font-size: 15px;
+    color: #444444;
+    line-height: 1.8;
+    max-width: 800px;
+}
+
+/* ─── ფასების კალკულატორის სტილები ─── */
+.luxury-calc-wrapper {
+    display: flex;
+    gap: 80px;
+}
+
+.calc-form-side {
+    flex: 1.2;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.calc-field {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.calc-field label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 500;
+    color: var(--text-dark, #1A1A1A);
+}
+
+.calc-field select {
+    padding: 16px;
+    border: 1px solid #DCD9D2;
+    background-color: var(--bg-cream, #FDFBF7);
+    font-size: 14px;
+    outline: none;
+    font-family: var(--font-sans, 'Inter', sans-serif);
+    transition: border 0.3s;
+    width: 100%;
+}
+
+.calc-field select:focus {
+    border-color: var(--gold-accent, #A98456);
+}
+
+.btn-editorial-calc {
+    padding: 18px;
+    background-color: var(--text-dark, #1A1A1A);
+    color: #ffffff;
+    border: none;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 100%;
+}
+
+.btn-editorial-calc:hover {
+    background-color: var(--gold-accent, #A98456);
+}
+
+.calc-display-side {
+    flex: 0.8;
+    background-color: #F7F4EE;
+    padding: 40px;
+    border: 1px solid #ECE9E2;
+    height: fit-content;
+}
+
+.calc-display-side h2 {
+    font-family: var(--font-serif, 'Playfair Display', serif);
+    font-size: 22px;
+    margin-bottom: 30px;
+    color: var(--text-dark, #1A1A1A);
+}
+
+.summary-line {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    font-size: 14px;
+    color: #555555;
+}
+
+..summary-total {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #DCD9D2;
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--text-dark, #1A1A1A);
+}
+
+.summary-total span:last-child {
+    color: var(--gold-accent, #A98456);
+}
+
+@media (max-width: 768px) {
+    .luxury-calc-wrapper {
+        flex-direction: column;
+        gap: 40px;
+    }
+} /* 🌟 აი ეს ფრჩხილი აკლდა აქ, რამაც დახურა მობილური კალკულატორი და გააქრობს ერორებს! */
+
+/* ─── Milton Boutique Premium Grid (Pixel Perfect Resolution) ─── */
+.boutique-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 50px;
+    margin-top: 60px;
+}
+
+/* დიდი ბარათის გადაქცევა Split-Screen ედიტორიალად */
+.boutique-card.large-card {
+    grid-column: span 2;
+    display: flex;
+    flex-direction: row;
+    background-color: #F7F4EE;
+    height: 650px;
+    align-items: center;
+    overflow: hidden;
+}
+
+.boutique-card.large-card .boutique-media-wrapper {
+    width: 45%;
+    height: 100%;
+}
+
+.boutique-card.large-card .boutique-info {
+    width: 55%;
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+/* სტანდარტული პროდუქტების მედია ფონი */
+.boutique-media-wrapper {
+    position: relative;
+    width: 100%;
+    height: 550px;
+    background-color: #ffffff;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.boutique-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.boutique-img {
+    width: 90%;
+    height: 90%;
+    object-fit: contain;
+}
+
+.boutique-card:hover .boutique-video,
+.boutique-card:hover .boutique-img {
+    transform: scale(1.02);
+}
+
+.boutique-info {
+    padding: 25px 0;
+}
+
+.info-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 10px;
+}
+
+.info-header h3 {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    font-weight: 400;
+    margin: 0;
+    letter-spacing: 0.5px;
+    color: var(--text-dark);
+}
+
+.product-price {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--gold-accent);
+}
+
+.product-sub {
+    font-size: 14px;
+    color: var(--muted-gray);
+    margin: 0 0 15px 0;
+    font-weight: 300;
+    line-height: 1.5;
+}
+
+.view-details {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #999999;
+    display: block;
+    border-bottom: 1px solid #E0DDD6;
+    padding-bottom: 5px;
+    width: fit-content;
+}
+
+/* ბუტიკის მობილური ვერსია */
+@media (max-width: 768px) {
+    .boutique-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    .boutique-card.large-card {
+        grid-column: span 1;
+        flex-direction: column;
+        height: auto;
+    }
+    .boutique-card.large-card .boutique-media-wrapper,
+    .boutique-card.large-card .boutique-info {
+        width: 100%;
+    }
+    .boutique-card.large-card .boutique-media-wrapper {
+        height: 450px;
+    }
+}/* ==========================================================================
+   L'ORÉAL OFFICIAL INSPIRED CATALOG & ROUTINES STYLES
+   ========================================================================== */
+
+/* ─── სექცია 1: თმის რუტინის ქარდები (ზურგით მდგარი გოგონები) ─── */
+.hair-routines-section {
+    margin-bottom: 90px;
+    padding-bottom: 50px;
+    border-bottom: 1px solid #ECE9E2;
+}
+
+.routine-section-title {
+    font-family: var(--font-serif);
+    font-size: 28px;
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 50px;
+    letter-spacing: 0.5px;
+}
+
+.routines-slider-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.routine-card {
+    text-align: center;
+    background-color: #ffffff;
+    padding: 25px;
+    border: 1px solid #F0EDE6;
+    transition: all 0.3s ease;
+}
+
+.routine-card:hover {
+    box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+    border-color: var(--gold-accent);
+}
+
+.routine-img-holder {
+    width: 100%;
+    height: 380px; /* იდეალური ვერტიკალური ზომა თმის სანახავად */
+    overflow: hidden;
+    margin-bottom: 20px;
+    background-color: #F7F4EE;
+}
+
+.routine-img-holder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.routine-card:hover .routine-img-holder img {
+    transform: scale(1.03);
+}
+
+.routine-card h4 {
+    font-family: var(--font-serif);
+    font-size: 18px;
+    font-weight: 500;
+    margin: 15px 0 10px 0;
+}
+
+.routine-card p {
+    font-size: 13px;
+    color: var(--muted-gray);
+    line-height: 1.6;
+    padding: 0 10px;
+}
+
+/* ─── სექცია 2: კატალოგის ლეიაუტი (ფილტრები მარცხნივ, კატალოგი მარჯვნივ) ─── */
+.shop-catalog-layout {
+    display: flex;
+    gap: 50px;
+    margin-top: 50px;
+}
+
+/* ფილტრების საიდბარი */
+.shop-sidebar {
+    width: 260px;
+    flex-shrink: 0;
+}
+
+.filter-group {
+    border-bottom: 1px solid #ECE9E2;
+    padding: 20px 0;
+}
+
+.filter-group h3 {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    color: var(--text-dark);
+}
+
+.filter-group h3 span {
+    font-size: 9px;
+    color: var(--muted-gray);
+}
+
+.filter-links-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.filter-links-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: #444444;
+    cursor: pointer;
+}
+
+.filter-links-list input[type="checkbox"] {
+    accent-color: var(--text-dark);
+    cursor: pointer;
+}
+
+/* პროდუქტების ნაწილი */
+.products-catalog-main {
+    flex-grow: 1;
+}
+
+.catalog-results-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: var(--muted-gray);
+    border-bottom: 1px solid #ECE9E2;
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+}
+
+.sort-trigger {
+    cursor: pointer;
+    color: var(--text-dark);
+    font-weight: 500;
+}
+
+/* პროფესიონალური გრიდი */
+.pro-products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.pro-product-card {
+    background-color: #ffffff;
+    border: 1px solid #F0EDE6;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s;
+}
+
+.pro-product-card:hover {
+    border-color: #D3CEB6;
+}
+
+.pro-img-wrapper {
+    width: 100%;
+    height: 320px;
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.pro-img-wrapper img {
+    width: 85%;
+    height: 85%;
+    object-fit: contain; /* ინარჩუნებს ბოთლების სრულ პროპორციას ჩაჭრის გარეშე */
+}
+
+.pro-card-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.pro-product-meta {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.pro-brand {
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--muted-gray);
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.pro-product-meta h4 {
+    font-family: var(--font-serif);
+    font-size: 18px;
+    font-weight: 400;
+    margin: 0 0 5px 0;
+    color: var(--text-dark);
+}
+
+.pro-sub {
+    font-size: 13px;
+    color: #666666;
+    margin: 0 0 12px 0;
+    font-weight: 300;
+}
+
+.pro-rating {
+    font-size: 11px;
+    margin-bottom: 20px;
+}
+
+.pro-rating span {
+    color: var(--muted-gray);
+    margin-left: 5px;
+}
+
+.pro-card-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    padding-top: 15px;
+    border-top: 1px solid #F5F2EB;
+}
+
+.pro-price {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.btn-pro-view {
+    padding: 10px 18px;
+    background-color: var(--text-dark);
+    color: #ffffff;
+    border: none;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-pro-view:hover {
+    background-color: var(--gold-accent);
+}
+
+/* რესპონსივი მობილურისთვის */
+@media (max-width: 1024px) {
+    .pro-products-grid { grid-template-columns: repeat(2, 1fr); }
+    .routines-slider-container { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+    .shop-catalog-layout { flex-direction: column; }
+    .shop-sidebar { width: 100%; }
+    .pro-products-grid { grid-template-columns: 1fr; }
+}
+/* ─── კონტაქტების გვერდის პრემიუმ სტილები (მყარი Grid განლაგება) ─── */
+.contact-editorial-wrapper {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr; /* მკაცრად ყოფს ორ სვეტად დესკტოპზე */
+    gap: 60px;
+    align-items: flex-start;
+}
+
+.contact-details-side {
+    width: 100%;
+}
+
+/* სტუდიის ტექსტური ბლოკი */
+.studio-meta-block {
+    margin-bottom: 50px;
+}
+
+.studio-meta-block h2 {
+    font-family: var(--font-serif);
+    font-size: 26px;
+    font-weight: 400;
+    margin-bottom: 20px;
+    color: var(--text-dark);
+}
+
+.studio-meta-block p {
+    font-size: 15px;
+    color: #444444;
+    margin-bottom: 12px;
+    font-weight: 300;
+}
+
+/* თხელი ფრანგული ინპუტების სტილი */
+.luxury-contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+}
+
+.form-line-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-line-group label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 500;
+    color: var(--text-dark);
+}
+
+.form-line-group input,
+.form-line-group textarea {
+    border: none;
+    border-bottom: 1px solid #DCD9D2;
+    background-color: transparent;
+    padding: 10px 0;
+    font-size: 14px;
+    font-family: var(--font-sans);
+    color: var(--text-dark);
+    outline: none;
+    transition: border-color 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.form-line-group input:focus,
+.form-line-group textarea:focus {
+    border-color: var(--gold-accent);
+}
+
+/* საკონტაქტო ღილაკი */
+.btn-luxury-submit {
+    background-color: var(--text-dark);
+    color: #ffffff;
+    border: none;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 15px;
+    width: fit-content;
+    padding: 16px 40px;
+}
+
+.btn-luxury-submit:hover {
+    background-color: var(--gold-accent);
+}
+
+/* რუკის ვიზუალური ჩარჩო */
+.contact-map-side {
+    width: 100%;
+}
+
+.map-container-box {
+    width: 100%;
+    height: 520px;
+    background-color: #F7F4EE;
+    border: 1px solid #ECE9E2;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+/* მობილური ადაპტაცია */
+@media (max-width: 768px) {
+    .contact-editorial-wrapper {
+        grid-template-columns: 1fr; /* მობილურზე ავტომატურად გადადის ერთ სვეტად */
+        gap: 40px;
+    }
+    .map-container-box {
+        height: 350px;
+    }
+}/* ─── ლოგოს ბმულისა და აქტიური ნავიგაციის სტილები ─── */
+.logo-link {
+    text-decoration: none !important;
+    color: inherit !important;
+}
+
+/* 🌟 მიმდინარე აქტიური გვერდის ღილაკი ანათებს ოქროსფრად თხელი ხაზით */
+.nav-item.active-nav {
+    color: var(--gold-accent, #A98456) !important;
+    font-weight: 500 !important;
+    border-bottom: 1px solid var(--gold-accent, #A98456);
+    padding-bottom: 4px;
+}/* ─── პრემიუმ ინტერაქციული FAQ სექცია ─── */
+.faq-editorial-section {
+    background-color: #ffffff;
+    padding: 140px 15%;
+    text-align: center;
+    border-top: 1px solid #F5F2EB;
+}
+
+.faq-section-title {
+    font-family: var(--font-serif, 'Playfair Display', serif);
+    font-size: 42px;
+    font-weight: 400;
+    color: var(--text-dark, #1A1A1A);
+    margin-bottom: 60px;
+    letter-spacing: 1px;
+}
+
+.faq-accordion-container {
+    max-width: 850px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.faq-item {
+    border-bottom: 1px solid #ECE9E2;
+    padding: 15px 0;
+    transition: all 0.3s ease;
+}
+
+/* კითხვის ღილაკი */
+.faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    font-family: var(--font-sans, sans-serif);
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--text-dark, #1A1A1A);
+    cursor: pointer;
+    outline: none;
+    transition: color 0.3s;
+}
+
+.faq-question:hover {
+    color: var(--gold-accent, #A98456);
+}
+
+.faq-icon {
+    font-size: 20px;
+    color: var(--gold-accent, #A98456);
+    font-weight: 300;
+    transition: transform 0.3s ease;
+}
+
+/* პასუხის ბლოკის გრაციოზული ანიმაცია */
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.faq-answer p {
+    font-size: 14px;
+    color: #555555;
+    line-height: 1.8;
+    padding: 5px 0 25px 0;
+    margin: 0;
+    font-weight: 300;
+}
+
+/* აქტიური მდგომარეობა */
+.faq-item.faq-active .faq-question {
+    color: var(--gold-accent, #A98456);
+}/* ─── თმის მოვლის გვერდის პრემიუმ სტილები ─── */
+.aftercare-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+    margin-top: 60px;
+}
+
+.aftercare-step-row {
+    display: flex;
+    gap: 60px;
+    border-bottom: 1px solid #ECE9E2;
+    padding-bottom: 50px;
+    align-items: flex-start;
+}
+
+.aftercare-step-row:last-child {
+    border-bottom: none;
+}
+
+/* დიდი მინიმალისტური ციფრები */
+.step-number-box {
+    font-family: var(--font-serif, 'Playfair Display', serif);
+    font-size: 72px;
+    font-weight: 300;
+    color: var(--gold-accent, #A98456);
+    line-height: 1;
+    min-width: 100px;
+    opacity: 0.8;
+}
+
+.step-content-box {
+    flex-grow: 1;
+}
+
+.step-content-box h2 {
+    font-family: var(--font-serif, 'Playfair Display', serif);
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--text-dark, #1A1A1A);
+    margin: 0 0 10px 0;
+    letter-spacing: 0.5px;
+}
+
+/* ნატიფი თეგები დასახელებებისთვის */
+.step-badge {
+    display: inline-block;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--gold-accent, #A98456);
+    background-color: #F7F4EE;
+    padding: 6px 14px;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.step-content-box p {
+    font-size: 15px;
+    color: #444444;
+    line-height: 1.9;
+    font-weight: 300;
+    max-width: 850px;
+    margin: 0;
+}
+
+/* მობილური ვერსია */
+@media (max-width: 768px) {
+    .aftercare-step-row {
+        flex-direction: column;
+        gap: 20px;
+        padding-bottom: 40px;
+    }
+    .step-number-box {
+        font-size: 54px;
+    }
+    .step-content-box h2 {
+        font-size: 22px;
+    }
+}/* ─── „მანამდე & შემდეგ“ ედიტორიალ გალერეა ─── */
+.before-after-editorial-section {
+    background-color: #FDFBF7; /* ნაზი კრემისფერი ფონი საინტერესო მრავალფეროვნებისთვის */
+    padding: 140px 8%;
+    text-align: center;
+    border-top: 1px solid #ECE9E2;
+}
+
+.ba-main-title {
+    font-family: var(--font-serif, 'Playfair Display', serif);
+    font-size: 42px;
+    font-weight: 400;
+    color: var(--text-dark, #1A1A1A);
+    margin: 15px 0 20px 0;
+    letter-spacing: 1px;
+}
+
+.ba-main-desc {
+    font-size: 15px;
+    color: #666666;
+    max-width: 650px;
+    margin: 0 auto 70px auto;
+    line-height: 1.8;
+    font-weight: 300;
+}
+
+/* ორსვეტიანი ბარათების გრიდი */
+.ba-editorial-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 50px;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.ba-editorial-card {
+    display: flex;
+    flex-direction: column;
+    background-color: transparent;
+    text-align: left;
+}
+
+/* ორად გაყოფილი მედია კონტეინერი */
+.ba-media-split-container {
+    display: flex;
+    width: 100%;
+    height: 480px; /* სოლიდური ვერტიკალური ზომა თმის დეტალების სანახავად */
+    gap: 4px; /* ნატიფი თეთრი გამყოფი ხაზი მანადმესა და შემდეგს შორის */
+    background-color: #ffffff;
+    overflow: hidden;
+}
+
+.ba-pane {
+    position: relative;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.ba-pane img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* ეფექტი მაუსის მიტანისას */
+.ba-editorial-card:hover .ba-pane img {
+    transform: scale(1.03);
+}
+
+/* ნატიფი მინიმალისტური თეგები სურათებზე */
+.ba-badge-label {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background-color: rgba(26, 26, 26, 0.85);
+    color: #ffffff;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 6px 14px;
+    font-weight: 500;
+}
+
+.ba-badge-label.gold-badge {
+    background-color: var(--gold-accent, #A98456);
+    left: auto;
+    right: 20px; /* "After" თეგი დაჯდება მარჯვენა კუთხეში */
+}
+
+/* ბარათის ტექსტური ინფორმაცია */
+.ba-card-meta {
+    padding: 25px 0 0 0;
+}
+
+.ba-card-meta h4 {
+    font-family: var(--font-serif, 'Playfair Display', serif);
+    font-size: 20px;
+    font-weight: 400;
+    margin: 0 0 10px 0;
+    color: var(--text-dark, #1A1A1A);
+    letter-spacing: 0.5px;
+}
+
+.ba-card-meta p {
+    font-size: 13.5px;
+    color: #555555;
+    line-height: 1.6;
+    margin: 0;
+    font-weight: 300;
+}
+
+/* მობილურებზე ერთ სვეტად გადაწყობა */
+@media (max-width: 900px) {
+    .ba-editorial-grid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+    .ba-media-split-container {
+        height: 400px;
+    }
+}/* ─── SCROLL REVEAL GLOBAL ANIMATIONS ─── */
+/* საწყისი მდგომარეობა: ელემენტი უხილავია და ჩაწეულია დაბლა 40 პიქსელით */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1.2s cubic-bezier(0.215, 0.61, 0.355, 1),
+                transform 1.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+    will-change: transform, opacity;
+}
+
+/* აქტიური მდგომარეობა: როცა სკრიპტი დაინახავს ეკრანზე, ელემენტი ნაზად ამოდის თავის ადგილზე */
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ნატიფი დაყოვნება გალერეის ბარათებისთვის, რომ სათითაოდ ამოტივტივდნენ */
+.reveal-delay-1 { transition-delay: 0.15s; }
+.reveal-delay-2 { transition-delay: 0.3s; }
+/* ─── კალათის ციფრის პოზიციონირება ─── */
+.cart-icon-wrapper {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.cart-count {
+    position: absolute;
+    top: -7px;
+    right: -9px;
+    background-color: var(--gold-accent, #A98456);
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: bold;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: none; /* იმართება ჯავასკრიპტით */
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-sans, sans-serif);
+}/* ─── MILTON BOUTIQUE (L'ORÉAL MARKET) ─── */
+.shop-editorial-container {
+    padding-top: 40px;
+}
+
+.shop-main-layout {
+    display: flex;
+    gap: 60px;
+    margin: 60px 0 120px 0;
+    align-items: flex-start;
+}
+
+/* მარცხენა ფილტრები */
+.shop-sidebar-filters {
+    width: 220px;
+    flex-shrink: 0;
+    text-align: left;
+    position: sticky;
+    top: 40px;
+}
+
+.filter-group {
+    margin-bottom: 45px;
+}
+
+.filter-group h3 {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-dark, #1A1A1A);
+    margin-bottom: 20px;
+    font-weight: 600;
+    border-bottom: 1px solid #ECE9E2;
+    padding-bottom: 8px;
+}
+
+.filter-group ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.filter-group ul li a {
+    text-decoration: none;
+    font-size: 14px;
+    color: #666666;
+    transition: color 0.3s ease;
+    font-weight: 300;
+}
+
+.filter-group ul li a:hover,
+.filter-group ul li a.active-filter {
+    color: var(--gold-accent, #A98456);
+    font-weight: 400;
+}
+
+/* პროდუქტების გრიდი */
+.products-display-grid {
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+}
+
+.luxury-product-card {
+    background-color: #ffffff;
+    border: 1px solid #F5F2EB;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.luxury-product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(26, 26, 26, 0.05);
+}
+
+.product-image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    background-color: #FDFBF7;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-image-wrapper img {
+    max-width: 85%;
+    max-height: 85%;
+    object-fit: contain;
+    transition: transform 0.5s ease;
+}
+
+.luxury-product-card:hover .product-image-wrapper img {
+    transform: scale(1.05);
+}
+
+.product-tag-badge {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: var(--text-dark, #1A1A1A);
+    color: #ffffff;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 5px 12px;
+    font-weight: 500;
+}
+
+/* პროდუქტის ტექსტები */
+.product-info-meta {
+    padding: 25px;
+    text-align: left;
+}
+
+.product-info-meta h4 {
+    font-family: var(--font-serif, 'Playfair Display', serif);
+    font-size: 19px;
+    font-weight: 400;
+    color: var(--text-dark, #1A1A1A);
+    margin: 0 0 6px 0;
+}
+
+.product-line-type {
+    font-size: 13px;
+    color: #777777;
+    margin: 0 0 20px 0;
+    font-weight: 300;
+}
+
+.product-price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #F5F2EB;
+    padding-top: 18px;
+}
+
+.price-tag {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-dark, #1A1A1A);
+}
+
+/* სუპერ ღილაკი კალათისთვის */
+.btn-pro-view {
+    background-color: transparent;
+    color: var(--text-dark, #1A1A1A);
+    border: 1px solid var(--text-dark, #1A1A1A);
+    padding: 10px 24px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    font-weight: 500;
+}
+
+.btn-pro-view:hover {
+    background-color: var(--text-dark, #1A1A1A);
+    color: #ffffff;
+}
+/* ─── გლობალური უსაფრთხოების რესეტი მასშტაბირების ბაგების წინააღმდეგ ─── */
+html, body {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important; /* მკაცრად კრძალავს ჰორიზონტალურ სქროლს და თეთრ სივრცეებს */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+/* ─── ნავბარის სრული სტაბილიზაცია ─── */
+.main-navbar {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 25px 8% !important;
+    background-color: #ffffff !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    border-bottom: 1px solid #F5F2EB !important;
+    position: relative !important;
+    z-index: 1000;
+}
+
+/* ─── მაღაზიის კონტეინერების სწორი სტრუქტურიზაცია ─── */
+.shop-editorial-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: hidden;
+}
+
+.shop-editorial-header {
+    padding: 80px 8% 20px 8% !important;
+    text-align: left;
+    box-sizing: border-box;
+}
+
+.shop-main-layout {
+    display: flex;
+    gap: 60px;
+    padding: 0 8% 100px 8% !important;
+    margin-top: 40px;
+    align-items: flex-start;
+    box-sizing: border-box;
+}
+
+/* ─── ვიდეო ბანერის რეკონსტრუქცია (ნულოვანი ჩამოჭრა და 100%-იანი სიზუსტე) ─── */
+.shop-video-promo-section {
+    position: relative !important;
+    width: 100% !important; /* იყენებს საიტის უსაფრთხო მაქსიმალურ სიგანეს 100vw-ის ნაცვლად */
+    height: 520px !important; /* სტაბილური სიმაღლე კინემატოგრაფიული პროპორციებისთვის */
+    overflow: hidden !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin-top: 40px !important;
+    margin-bottom: 0 !important;
+    box-sizing: border-box;
+}
+
+.promo-bg-video {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important; /* მკაცრად აფიქსირებს ცენტრს მასშტაბირებისას */
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important; /* იცავს ვიდეოს პროპორციებს დამახინჯების გარეშე */
+    object-position: center center !important;
+    z-index: 1;
+}
+
+.video-promo-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.6)) !important;
+    z-index: 2;
+}
+
+.video-promo-content {
+    position: relative;
+    z-index: 3;
+    color: #ffffff !important;
+    text-align: center;
+    max-width: 800px;
+    padding: 0 30px;
+    box-sizing: border-box;
+}
+/* ─── ბუტიკის ვიზუალური კორექცია ─── */
+.shop-editorial-container {
+    width: 100%;
+    overflow: hidden;
+}
+
+.shop-editorial-header {
+    padding: 80px 8% 20px 8% !important;
+    text-align: left;
+}
+
+.shop-main-layout {
+    display: flex;
+    gap: 60px;
+    padding: 0 8% 80px 8% !important;
+    margin-top: 40px;
+    align-items: flex-start;
+}
+
+.products-display-grid {
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+}
+
+/* 🎥 ვიდეო კონტეინერის სტაბილური პროპორციები */
+.shop-video-promo-section {
+    position: relative;
+    width: 100%;
+    height: 540px; /* ფიქსირებული, კინემატოგრაფიული ვერტიკალური რეზოლუცია */
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+    background-color: #000000;
+}
+
+.promo-bg-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* ინარჩუნებს ვიდეოს პროპორციულ ხარისხს ჩამოჭრის გარეშე */
+    object-position: center;
+    z-index: 1;
+}
+
+.video-promo-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.45); /* კორექტული კონტრასტი ტექსტისთვის */
+    z-index: 2;
+}
+
+.video-promo-content {
+    position: relative;
+    z-index: 3;
+    color: #ffffff;
+    text-align: center;
+    max-width: 750px;
+    padding: 0 20px;
+}
+/* ─── 🎥 L'ORÉAL VERTICAL REELS SHOWCASE (9:16 SYSTEM) ─── */
+.reels-editorial-section {
+    padding: 100px 8% 120px 8% !important;
+    background-color: #FDFBF7; /* ნაზი კრემისფერი ფონი ვიზუალური მრავალფეროვნებისთვის */
+    border-top: 1px solid #ECE9E2;
+    text-align: center;
+}
+
+.reels-header {
+    margin-bottom: 60px;
+}
+
+.reels-subtitle {
+    font-size: 11px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 3px !important;
+    color: var(--gold-accent, #A98456);
+    display: block;
+    margin-bottom: 12px;
+}
+
+.reels-header h2 {
+    font-family: var(--font-serif, 'Playfair Display', serif) !important;
+    font-size: 36px !important;
+    font-weight: 400 !important;
+    color: #1A1A1A;
+    margin: 0;
+}
+
+/* სამსვეტიანი ვერტიკალური გრიდი */
+.reels-grid-layout {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.reel-card {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+/* 🎯 მათემატიკურად მკაცრი 9:16 პროპორცია — აბსოლუტურად ნულოვანი ჩამოჭრა */
+.reel-video-box {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 9 / 16; /* ლოკავს მობილური კამპანიების ორიგინალ გარჩევადობას */
+    background-color: #000000;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+}
+
+.reel-native-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover !important; /* ვიდეო ივსება იდეალურად, ხარისხის დაუკარგავად */
+    object-position: center;
+}
+
+.reel-card h4 {
+    font-family: var(--font-serif, 'Playfair Display', serif) !important;
+    font-size: 20px !important;
+    font-weight: 400 !important;
+    color: #1A1A1A;
+    margin: 20px 0 8px 0 !important;
+}
+
+.reel-card p {
+    font-size: 13.5px !important;
+    line-height: 1.6 !important;
+    color: #666666;
+    font-weight: 300;
+    margin: 0;
+}
+
+/* ადაპტაცია პატარა ეკრანებისთვის */
+@media (max-width: 900px) {
+    .reels-grid-layout {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+}/* ─── 🔍 LUXURY MINIMALIST SEARCH INPUT ─── */
+.search-wrapper {
+    position: relative;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+#shopSearchInput {
+    width: 100%;
+    padding: 12px 0;
+    font-size: 14px;
+    border: none;
+    border-bottom: 1px solid #ECE9E2;
+    background-color: transparent;
+    font-family: inherit;
+    color: #1A1A1A;
+    outline: none;
+    transition: border-bottom-color 0.3s ease;
+    font-weight: 300;
+}
+
+#shopSearchInput:focus {
+    border-bottom-color: var(--gold-accent, #A98456);
+}
+
+/* ლინკების სტილები ბარათებისთვის */
+.product-card-link, .product-title-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+/* ─── 🛒 MILTON PREMIUM 2-COLUMN CATALOG SYSTEM ─── */
+/* (დუბლიკატი .editorial-page-container წესი წაშლილია — ძირითადი განსაზღვრება 147-ე ხაზზეა) */
+
+.shop-catalog-layout {
+    display: flex;
+    gap: 60px; /* მდიდრული დაშორება ფილტრებსა და კატალოგს შორის */
+    margin-top: 50px;
+    align-items: flex-start;
+}
+
+/* ფილტრების პანელი */
+.shop-sidebar {
+    width: 240px;
+    flex-shrink: 0;
+    text-align: left;
+    position: sticky;
+    top: 40px;
+}
+
+.filter-group-box {
+    margin-bottom: 40px;
+}
+
+.filter-group-box h3 {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #1A1A1A;
+    margin-bottom: 18px;
+    border-bottom: 1px solid #ECE9E2;
+    padding-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+}
+
+.filter-group-box h3 span { font-size: 9px; color: #A98456; }
+
+#liveSearch {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ECE9E2;
+    background-color: #FDFBF7;
+    outline: none;
+    font-size: 13px;
+    font-family: inherit;
+    transition: border-color 0.3s;
+}
+
+#liveSearch:focus { border-color: #A98456; }
+
+.filter-links-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.filter-links-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13.5px;
+    color: #444444;
+    cursor: pointer;
+    font-weight: 300;
+}
+
+.filter-links-list input[type="checkbox"] {
+    accent-color: #A98456;
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+}
+
+/* კატალოგის ძირითადი არე */
+.products-catalog-main {
+    flex-grow: 1;
+}
+
+.catalog-results-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: #777777;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #F5F2EB;
+    padding-bottom: 15px;
+    font-weight: 300;
+}
+
+/* 🎯 იდეალური 2-სვეტიანი გრიდი მაქსიმალური რეზოლუციისთვის */
+.pro-products-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important; /* ბრუნდება დიდი, მდიდრული ზომა */
+    gap: 40px !important;
+}
+
+.pro-product-card {
+    background-color: #ffffff;
+    border: 1px solid #F5F2EB;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    padding-bottom: 15px;
+}
+
+.pro-product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(26, 26, 26, 0.04);
+}
+
+.pro-img-wrapper {
+    position: relative;
+    width: 100%;
+    height: 420px; /* დიდი, მკაფიო სიმაღლე ფოტოებისთვის და ვიდეოსთვის */
+    background-color: #FDFBF7;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pro-img-wrapper img, .pro-card-video {
+    max-width: 85%;
+    max-height: 85%;
+    object-fit: contain;
+}
+
+.pro-card-video {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover; /* პირველი ბარათის 3D ვიდეო გაიშლება იდეალურად */
+}
+
+/* ტექსტური ნაწილი ქარდებში */
+.pro-product-meta {
+    padding: 25px;
+    text-align: left;
+}
+
+.pro-brand {
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: #A98456;
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.pro-product-meta h4 {
+    font-family: var(--font-serif, 'Playfair Display', serif);
+    font-size: 21px;
+    font-weight: 400;
+    color: #1A1A1A;
+    margin: 0 0 8px 0;
+}
+
+.pro-sub {
+    font-size: 13px;
+    color: #666666;
+    margin: 0 0 20px 0;
+    line-height: 1.6;
+    font-weight: 300;
+    min-height: 42px; /* ათანაბრებს ტექსტის სიმაღლეებს */
+}
+
+.pro-rating {
+    font-size: 12px;
+    margin-bottom: 20px;
+}
+
+.pro-rating span { color: #999; font-size: 11px; margin-left: 5px; }
+
+.pro-card-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #F5F2EB;
+    padding-top: 20px;
+}
+
+.pro-price {
+    font-size: 17px;
+    font-weight: 500;
+    color: #1A1A1A;
+}
+
+/* მობილური ადაპტაცია */
+@media (max-width: 900px) {
+    .shop-catalog-layout { flex-direction: column; gap: 40px; }
+    .shop-sidebar { width: 100%; position: static; }
+    .pro-products-grid { grid-template-columns: 1fr !important; }
+    .pro-img-wrapper { height: 350px; }
+}
+/* ─── 💎 LUXURY PRODUCT DETAIL RESOLUTION & SCALE CORRECTIONS ─── */
+.editorial-detail-container {
+    padding: 60px 8% 120px 8% !important;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.luxury-product-showcase {
+    display: flex;
+    gap: 70px;
+    margin-bottom: 100px;
+    align-items: flex-start;
+}
+
+/* 🎯 ფოტოს ზომის მკაცრი კონტროლი - აღარ გაიწელება გიგანტურად */
+.product-media-gallery {
+    width: 48%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.main-display-box {
+    width: 100%;
+    height: 500px; /* ფიქსირებული, იდეალური საგალერეო სიმაღლე */
+    background-color: #FDFBF7;
+    border: 1px solid #F5F2EB;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gallery-main-media {
+    max-width: 85%;
+    max-height: 85%;
+    object-fit: contain; /* ინარჩუნებს ორიგინალ პროპორციებს სუფთად */
+}
+
+.thumbnails-track {
+    display: flex;
+    gap: 12px;
+}
+
+.thumb-item {
+    width: 75px;
+    height: 75px;
+    border: 1px solid #ECE9E2;
+    background-color: #FDFBF7;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.thumb-item img { max-width: 80%; max-height: 80%; object-fit: contain; }
+.thumb-item.active { border-color: #A98456; }
+
+/* მარჯვენა ტექსტური პანელი */
+.product-purchase-meta {
+    width: 52%;
+    text-align: left;
+}
+
+/* 🌟 პროფესიონალური ექსპერტ-ბლოკის სტილი */
+.product-expert-prescription {
+    background-color: #FDFBF7;
+    border-left: 2px solid #A98456;
+    padding: 20px 25px;
+    margin: 25px 0 35px 0;
+}
+
+.product-expert-prescription h3 {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: #A98456;
+    margin: 0 0 10px 0;
+    font-weight: 600;
+}
+
+.product-expert-prescription p {
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: #444444;
+    margin: 0;
+    font-weight: 300;
+}
+
+/* ყიდვისა და რაოდენობის ზონა */
+.purchase-action-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.meta-price-tag {
+    font-size: 28px;
+    font-weight: 400;
+    color: #1A1A1A;
+    font-family: var(--font-serif, serif);
+}
+
+/* 🔢 რაოდენობის კონტეინერი */
+.quantity-selector {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ECE9E2;
+    background-color: #ffffff;
+}
+
+.qty-btn {
+    background: none;
+    border: none;
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+    cursor: pointer;
+    color: #1A1A1A;
+    transition: background-color 0.2s;
+}
+
+.qty-btn:hover { background-color: #FDFBF7; }
+
+#productQty {
+    width: 45px;
+    height: 40px;
+    text-align: center;
+    border: none;
+    border-left: 1px solid #ECE9E2;
+    border-right: 1px solid #ECE9E2;
+    font-size: 14px;
+    color: #1A1A1A;
+    font-weight: 500;
+}
+
+.main-action-btn {
+    width: 100%;
+    padding: 16px 0;
+    background-color: #1A1A1A;
+    color: #ffffff;
+    border: 1px solid #1A1A1A;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: 500;
+    margin-bottom: 30px;
+}
+
+.main-action-btn:hover { background-color: #A98456; border-color: #A98456; }
+
+/* ─── 🎥 L'ORÉAL CAMPAIGN REELS (გაზრდილი, გრანდიოზული მასშტაბი) ─── */
+.reels-editorial-section {
+    padding: 120px 0 !important; /* მეტი სივრცე სუნთქვისთვის */
+    background-color: #FDFBF7;
+    width: 100%;
+}
+
+.reels-grid-layout {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    max-width: 1400px; /* მნიშვნელოვნად გაიზარდა მაქსიმალური სიგანე */
+    margin: 0 auto;
+    padding: 0 4%;
+}
+
+.reel-video-box {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    background-color: #000000;
+    overflow: hidden;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.06); /* უფრო რბილი, მდიდრული ჩრდილი */
+}/* ─── 🔬 MILTON CAPSULE ARTISTRY & HAIR COUTURE SYSTEM ─── */
+.section-art-title {
+    font-family: var(--font-serif, 'Playfair Display', serif);
+    font-size: 24px;
+    font-weight: 400;
+    color: #1A1A1A;
+    margin-bottom: 35px;
+    text-transform: capitalize;
+    letter-spacing: 0.5px;
+}
+
+/* ჩვენი თმების ზედა ბლოკი */
+.hair-categories-showcase {
+    margin-bottom: 90px;
+    border-bottom: 1px solid #F5F2EB;
+    padding-bottom: 60px;
+}
+
+.hair-type-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.hair-type-card {
+    background-color: #ffffff;
+    border: 1px solid #ECE9E2;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.hair-type-card:hover {
+    border-color: #A98456;
+}
+
+.hair-mini-box {
+    width: 100px;
+    height: 100px;
+    background-color: #FDFBF7;
+    margin-bottom: 15px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hair-mini-box img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+}
+
+.hair-type-card h3 {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: #1A1A1A;
+    margin: 0;
+    font-weight: 600;
+}
+
+/* ოთხი კაფსულის საავტორო განლაგება */
+.capsules-art-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr) !important; /* 4 კაფსულა ერთ რიგში იდეალურად */
+    gap: 25px;
+}
+
+.capsule-editorial-card {
+    background-color: #ffffff;
+    border: 1px solid #F5F2EB;
+    padding: 35px 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.capsule-card-title {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: #1A1A1A;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+}
+
+/* 🎯 იდეალური მრგვალი ჩარჩოს არქიტექტურა */
+.capsule-round-frame {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%; /* სრული წრე */
+    border: 1px solid #ECE9E2;
+    background-color: #FDFBF7;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 35px;
+    box-shadow: 0 10px 25px rgba(26, 26, 26, 0.03); /* ძალიან ნაზი ჩრდილი */
+}
+
+.capsule-round-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* სქრინების იდენტურად ავსებს წრეს */
+}
+
+/* ტექნიკური მონაცემების ბლოკი */
+.capsule-technical-meta {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex-grow: 1;
+    margin-bottom: 30px;
+}
+
+.meta-spec-block {
+    text-align: center;
+}
+
+.meta-spec-block h5 {
+    font-size: 12px;
+    color: #1A1A1A;
+    margin: 0 0 5px 0;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.meta-spec-block p {
+    font-size: 13px;
+    color: #666666;
+    margin: 0;
+    line-height: 1.5;
+    font-weight: 300;
+}
+
+/* 🔴 სირთულის წრეების სისტემა */
+.difficulty-dots {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 5px;
+}
+
+.difficulty-dots .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 1px solid #1A1A1A;
+    background-color: transparent;
+}
+
+.difficulty-dots .dot.filled {
+    background-color: #1A1A1A; /* შევსებული წრეები სირთულისთვის */
+}
+
+/* ფინალური მინიმალისტური ღილაკი */
+.capsule-action-btn {
+    width: 100%;
+    padding: 13px 0;
+    background-color: #1A1A1A;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+.capsule-action-btn:hover {
+    background-color: #A98456;
+}
+
+/* მობილური ადაპტაცია */
+@media (max-width: 1100px) {
+    .capsules-art-grid, .hair-type-grid { grid-template-columns: repeat(2, 1fr) !important; }
+}
+@media (max-width: 650px) {
+    .capsules-art-grid, .hair-type-grid { grid-template-columns: 1fr !important; }
+}
+/* ==================================================================
+   👑 MILTON CUSTOM AUTONOMOUS LUXURY NAVBAR SYSTEM
+   ================================================================== */
+
+.milton-luxe-nav-wrapper {
+    width: 100% !important;
+    background-color: #ffffff !important;
+    border-bottom: 1px solid #ECE9E2 !important;
+    padding: 25px 8% 0 8% !important; /* 8% საფირმო ჩარჩო */
+    box-sizing: border-box !important;
+    position: relative !important;
+    z-index: 9999 !important;
+    display: block !important;
+}
+
+.luxe-nav-top-bar {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 100% !important;
+    padding-bottom: 20px !important;
+}
+
+.luxe-logo-anchor {
+    font-family: var(--font-serif) !important;
+    font-size: 30px !important;
+    letter-spacing: 5px !important;
+    color: #1A1A1A !important;
+    text-decoration: none !important;
+    text-transform: uppercase !important;
+    font-weight: 400 !important;
+}
+
+.luxe-nav-icons a {
+    text-decoration: none !important;
+    color: #1A1A1A !important;
+    font-size: 18px !important;
+    position: relative !important;
+}
+
+/* სიების იძულებითი რესეტი Legacy სტილებისგან დასაცავად */
+.luxe-navigation-container,
+.luxe-menu-list,
+.luxe-menu-list li {
+    list-style: none !important;
+    list-style-type: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.luxe-navigation-container {
+    display: flex !important;
+    justify-content: center !important;
+    width: 100% !important;
+}
+
+.luxe-menu-list {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 38px !important;
+    justify-content: center !important;
+}
+
+.luxe-menu-list > li {
+    position: relative !important;
+    padding-bottom: 20px !important;
+}
+
+.luxe-item {
+    text-decoration: none !important;
+    font-size: 12px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 2px !important;
+    color: #1A1A1A !important;
+    font-weight: 500 !important;
+    transition: color 0.3s !important;
+}
+
+.luxe-item:hover, .active-nav {
+    color: #A98456 !important;
+}
+
+/* 🎯 ჩამოსაშლელი მეგამენიუს ბარათი (საწყისად აბსოლუტურად დამალული) */
+.luxe-megamenu-card {
+    display: none !important; /* მკაცრი დამალვა */
+    position: absolute !important;
+    top: 100% !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: 860px !important;
+    background-color: #ffffff !important;
+    border: 1px solid #ECE9E2 !important;
+    box-shadow: 0 35px 70px rgba(26, 26, 26, 0.08) !important;
+    padding: 40px !important;
+    z-index: 99999 !important;
+}
+
+/* ⚡ გაცოცხლება მაუსის მიტანისას (Hover) */
+.luxe-has-dropdown:hover .luxe-megamenu-card {
+    display: block !important; /* აჩვენებს მხოლოდ ჰოვერზე */
+}
+
+/* ერთსვეტიანი დროპდაუნები (აკადემია & მოვლა) */
+.luxe-megamenu-card.luxe-single-column {
+    width: 280px !important;
+    padding: 25px !important;
+}
+
+.luxe-single-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 14px !important;
+    text-align: left !important;
+}
+
+.luxe-single-grid a {
+    text-decoration: none !important;
+    font-size: 13px !important;
+    color: #444444 !important;
+    transition: color 0.2s !important;
+    font-weight: 300 !important;
+    line-height: 1.4 !important;
+}
+
+.luxe-single-grid a:hover { color: #A98456 !important; }
+
+/* მეგამენიუს შიდა ბადე */
+.luxe-megamenu-grid {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 25px !important;
+    text-align: left !important;
+}
+
+.luxe-grid-column h4 {
+    font-size: 11px !important;
+    letter-spacing: 1.5px !important;
+    color: #1A1A1A !important;
+    margin: 0 0 15px 0 !important;
+    font-weight: 600 !important;
+    border-bottom: 1px solid #F5F2EB !important;
+    padding-bottom: 8px !important;
+}
+
+.luxe-grid-column a {
+    display: block !important;
+    text-decoration: none !important;
+    font-size: 12.5px !important;
+    color: #555555 !important;
+    margin-bottom: 12px !important;
+    transition: color 0.2s !important;
+    font-weight: 300 !important;
+    line-height: 1.4 !important;
+}
+
+.luxe-grid-column a:hover {
+    color: #A98456 !important;
+}
+
+/* პრომო ბანერი */
+.luxe-banner-column {
+    background-color: #FDFBF7 !important;
+    padding: 20px !important;
+    border: 1px solid #F5F2EB !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+}
+
+.luxe-nav-promo h5 {
+    font-size: 12px !important;
+    letter-spacing: 1px !important;
+    margin: 0 0 6px 0 !important;
+    color: #A98456 !important;
+    font-weight: 600 !important;
+}
+
+.luxe-nav-promo p {
+    font-size: 11px !important;
+    color: #666666 !important;
+    margin: 0 0 15px 0 !important;
+    line-height: 1.5 !important;
+    font-weight: 300 !important;
+}
+
+.luxe-promo-link {
+    font-size: 11px !important;
+    text-decoration: none !important;
+    color: #1A1A1A !important;
+    font-weight: 600 !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   🅰 საიტის ერთიანი ტიპოგრაფია — სტანდარტი services გვერდიდან:
+   font-size: 15px; color: #444444; line-height: 1.8; weight: 400
+   ═══════════════════════════════════════════════════════════ */
+
+.editorial-desc,
+.faq-answer p,
+.step-content-box p,
+.ba-card-meta p,
+.ba-main-desc,
+.next-brand-section p,
+.brand-container p,
+.meta-spec-block p,
+.hair-type-card p,
+.studio-meta-block p,
+.kit-section p,
+.cm-step p,
+.cmp-attr p {
+    font-size: 15px !important;
+    color: #444444 !important;
+    line-height: 1.8 !important;
+    font-weight: 400 !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   🌙 DARK MODE — html.dark-mode (ინახება localStorage: milton_theme)
+   პალიტრა: ფონი #131211 • ზედაპირი #1c1a18 • ჩარჩო #2f2c28
+            სათაური #EFECE5 • ტექსტი #C6C1B7 • ოქრო #C29B66
+   ═══════════════════════════════════════════════════════════ */
+
+html.dark-mode {
+    --bg-cream: #131211;
+    --text-dark: #EFECE5;
+    --gold-accent: #C29B66;
+}
+
+html.dark-mode body { background-color: #131211 !important; color: #C6C1B7 !important; }
+
+/* ── ტექსტის საბაზისო წესები ── */
+html.dark-mode h1, html.dark-mode h2, html.dark-mode h3,
+html.dark-mode h4, html.dark-mode h5, html.dark-mode h6 { color: #EFECE5 !important; }
+html.dark-mode p { color: #C6C1B7 !important; }
+html.dark-mode span { color: #C6C1B7 !important; }
+html.dark-mode label { color: #EFECE5 !important; }
+html.dark-mode summary { color: #EFECE5 !important; }
+
+/* inline-სტილიანი ტექსტების კორექცია */
+html.dark-mode [style*="color: #1A1A1A"], html.dark-mode [style*="color: #1a1a1a"],
+html.dark-mode [style*="color:#1A1A1A"], html.dark-mode [style*="color:#1a1a1a"] { color: #EFECE5 !important; }
+html.dark-mode [style*="color: #444"], html.dark-mode [style*="color: #555"],
+html.dark-mode [style*="color: #666"], html.dark-mode [style*="color: #888"],
+html.dark-mode [style*="color: #999"] { color: #C6C1B7 !important; }
+html.dark-mode [style*="color: #A98456"], html.dark-mode [style*="color:#A98456"] { color: #C29B66 !important; }
+
+/* ── ჰედერი და ნავიგაცია ── */
+html.dark-mode .milton-luxury-header { background-color: #171512 !important; border-bottom-color: #2f2c28 !important; }
+html.dark-mode .luxe-brand-logo, html.dark-mode .luxe-nav-link { color: #EFECE5 !important; }
+html.dark-mode .luxe-nav-link:hover, html.dark-mode .active-nav { color: #C29B66 !important; }
+html.dark-mode .luxe-dropdown-menu { background-color: #1c1a18 !important; border-color: #2f2c28 !important; box-shadow: 0 35px 70px rgba(0,0,0,0.5) !important; }
+html.dark-mode .luxe-mega-col h4 { color: #EFECE5 !important; border-bottom-color: #2f2c28 !important; }
+html.dark-mode .luxe-mega-col a, html.dark-mode .luxe-narrow-stack a { color: #C6C1B7 !important; }
+html.dark-mode .luxe-mega-col a:hover, html.dark-mode .luxe-narrow-stack a:hover { color: #C29B66 !important; }
+html.dark-mode .luxe-promo-col { background-color: #211f1c !important; border-color: #2f2c28 !important; }
+html.dark-mode .luxe-promo-col a { color: #EFECE5 !important; }
+html.dark-mode .luxe-lang-switch { color: #97928A !important; }
+html.dark-mode .luxe-cart-wrapper { color: #EFECE5 !important; }
+html.dark-mode .luxe-cart-wrapper .cart-count { background-color: #C29B66 !important; color: #ffffff !important; }
+
+/* ── დიდი ღია სექციები ── */
+html.dark-mode .before-after-editorial-section,
+html.dark-mode .faq-editorial-section,
+html.dark-mode .reels-editorial-section,
+html.dark-mode .next-brand-section,
+html.dark-mode .milton-shop-wrapper,
+html.dark-mode .kit-section { background-color: #131211 !important; border-color: #2f2c28 !important; }
+
+/* ── ბარათები / ზედაპირები ── */
+html.dark-mode .cmp-card, html.dark-mode .cm-step, html.dark-mode .cm-service,
+html.dark-mode .capsule-editorial-card, html.dark-mode .pro-product-card,
+html.dark-mode .product-expert-prescription, html.dark-mode .routine-card,
+html.dark-mode .boutique-card, html.dark-mode .luxury-product-card,
+html.dark-mode .filter-group-box, html.dark-mode .calc-display-side,
+html.dark-mode .cart-drawer, html.dark-mode .hair-type-card {
+    background-color: #1c1a18 !important;
+    border-color: #2f2c28 !important;
+}
+
+/* inline-სტილიანი ღია ფონების კორექცია (აკადემია, კალკულატორი, ბუტიკის ბლოკები) */
+html.dark-mode [style*="#FDFBF7"] { background-color: #1c1a18 !important; border-color: #2f2c28 !important; }
+html.dark-mode [style*="#F7F4EE"] { background-color: #1c1a18 !important; border-color: #2f2c28 !important; }
+html.dark-mode [style*="background:#fff"], html.dark-mode [style*="background: #fff"],
+html.dark-mode [style*="background-color: #ffffff"], html.dark-mode [style*="background-color:#ffffff"] { background-color: #1c1a18 !important; border-color: #2f2c28 !important; }
+
+/* პროდუქტის ფოტოების უჯრები ღია რჩება — ფოტოები თეთრფონიანია */
+html.dark-mode .ths-img-box, html.dark-mode .pro-img-wrapper,
+html.dark-mode .main-display-box, html.dark-mode .hair-mini-box,
+html.dark-mode .capsule-round-frame, html.dark-mode .ba-media-split-container,
+html.dark-mode .thumb-item, html.dark-mode .boutique-media-wrapper,
+html.dark-mode .routine-img-holder, html.dark-mode .product-image-wrapper { background-color: #EDEAE3 !important; }
+
+/* ── გამყოფი ხაზები ── */
+html.dark-mode .editorial-service-row, html.dark-mode .aftercare-step-row,
+html.dark-mode .catalog-results-header, html.dark-mode .filter-group,
+html.dark-mode .cart-item-row, html.dark-mode .cart-drawer-head,
+html.dark-mode .cart-drawer-foot, html.dark-mode .cmp-method-name,
+html.dark-mode .faq-item, html.dark-mode .faq-question,
+html.dark-mode .luxury-media-showcase, html.dark-mode .sidebar-title,
+html.dark-mode .pro-card-bottom, html.dark-mode .contact-editorial-wrapper { border-color: #2f2c28 !important; }
+
+/* ── ფორმები ── */
+html.dark-mode input, html.dark-mode select, html.dark-mode textarea {
+    background-color: #211f1c !important;
+    border-color: #3a362f !important;
+    color: #EFECE5 !important;
+}
+html.dark-mode input::placeholder, html.dark-mode textarea::placeholder { color: #7d786f !important; }
+html.dark-mode .luxe-checkmark { background-color: #211f1c !important; border-color: #3a362f !important; }
+html.dark-mode .luxe-filter-item input:checked ~ .luxe-checkmark { background-color: #C29B66 !important; border-color: #C29B66 !important; box-shadow: inset 0 0 0 3px #1c1a18 !important; }
+
+/* ── ღილაკები — ოქროსფერი აქცენტი მუქ ფონზე ── */
+html.dark-mode .btn-pro-view, html.dark-mode .ths-quick-add,
+html.dark-mode .capsule-action-btn, html.dark-mode .cmp-cta,
+html.dark-mode .cart-checkout-btn, html.dark-mode .btn-luxury-submit,
+html.dark-mode .kit-form button, html.dark-mode .cm-service a {
+    background-color: #A98456 !important;
+    color: #ffffff !important;
+}
+html.dark-mode .btn-pro-view:hover, html.dark-mode .ths-quick-add:hover,
+html.dark-mode .capsule-action-btn:hover, html.dark-mode .cmp-cta:hover,
+html.dark-mode .cart-checkout-btn:hover, html.dark-mode .btn-luxury-submit:hover,
+html.dark-mode .kit-form button:hover, html.dark-mode .cm-service a:hover { background-color: #8d6c42 !important; }
+
+html.dark-mode .cm-tab { background-color: #1c1a18 !important; border-color: #3a362f !important; color: #C6C1B7 !important; }
+html.dark-mode .cm-tab:hover { border-color: #C29B66 !important; color: #C29B66 !important; }
+html.dark-mode .cm-tab.active { background-color: #A98456 !important; border-color: #A98456 !important; color: #ffffff !important; }
+
+html.dark-mode .qty-btn, html.dark-mode .quantity-selector, html.dark-mode .cart-qty-btn {
+    background-color: #211f1c !important;
+    border-color: #3a362f !important;
+    color: #EFECE5 !important;
+}
+
+/* ── აქცენტების აღდგენა (გენერიკული წესების შემდეგ) ── */
+html.dark-mode .editorial-subtitle, html.dark-mode .section-num,
+html.dark-mode .cmp-attr h5, html.dark-mode .cm-group-tag,
+html.dark-mode .step-badge, html.dark-mode .pro-brand, html.dark-mode .ths-brand { color: #C29B66 !important; }
+html.dark-mode .step-badge { background-color: #211f1c !important; }
+html.dark-mode .ths-badge { color: #ffffff !important; }
+html.dark-mode .ths-badge.badge-new { background-color: #C29B66 !important; }
+html.dark-mode .ths-price, html.dark-mode .pro-price, html.dark-mode .cm-code,
+html.dark-mode .cart-item-name, html.dark-mode .cart-item-line,
+html.dark-mode .faq-question span, html.dark-mode .accordion-trigger,
+html.dark-mode .sort-trigger, html.dark-mode .meta-price-tag { color: #EFECE5 !important; }
+html.dark-mode .faq-icon { color: #C29B66 !important; }
+html.dark-mode .kit-msg.ok { color: #8fc189 !important; }
+html.dark-mode .kit-msg.err { color: #d98873 !important; }
+html.dark-mode .cmp-fee span { color: #4a453d !important; }
+html.dark-mode .step-number-box, html.dark-mode .service-num { color: #555047 !important; }
+html.dark-mode .filter-clear, html.dark-mode .cart-continue-btn { color: #97928A !important; }
+html.dark-mode .cart-close { color: #97928A !important; background: none !important; }
+html.dark-mode .cart-item-remove { background: none !important; }
+html.dark-mode .luxe-theme-toggle { background: none !important; }
+
+/* difficulty წერტილები */
+html.dark-mode .difficulty-dots .dot { background-color: #2f2c28 !important; }
+html.dark-mode .difficulty-dots .dot.filled { background-color: #C29B66 !important; }

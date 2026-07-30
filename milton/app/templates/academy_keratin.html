@@ -1,0 +1,71 @@
+ა{% extends "base.html" %}
+
+{% block title %}{{ t.ik_title }}{% endblock %}
+
+{% block content %}
+<div class="editorial-page-container">
+
+    <header class="editorial-header">
+        <span class="editorial-subtitle">{{ t.ik_sub }}</span>
+        <h1 class="editorial-title">{{ t.ik_h1 }}</h1>
+        <p class="editorial-desc">{{ t.ik_desc }}</p>
+    </header>
+
+    <!-- კურსის ძირითადი პარამეტრები -->
+    <section style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; margin-top: 50px;">
+        <div style="background-color: #FDFBF7; border: 1px solid #ECE9E2; padding: 35px 30px; text-align: left;">
+            <h5 style="font-family: var(--font-sans); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #A98456; font-weight: 600; margin: 0 0 12px 0;">{{ t.ik_duration_l }}</h5>
+            <p style="font-family: var(--font-sans); font-size: 15px; color: #444444; font-weight: 400; line-height: 1.8; margin: 0;">{{ t.ik_duration_v }}</p>
+        </div>
+        <div style="background-color: #FDFBF7; border: 1px solid #ECE9E2; padding: 35px 30px; text-align: left;">
+            <h5 style="font-family: var(--font-sans); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #A98456; font-weight: 600; margin: 0 0 12px 0;">{{ t.ik_format_l }}</h5>
+            <p style="font-family: var(--font-sans); font-size: 15px; color: #444444; font-weight: 400; line-height: 1.8; margin: 0;">{{ t.ik_format_v }}</p>
+        </div>
+        <div style="background-color: #FDFBF7; border: 1px solid #ECE9E2; padding: 35px 30px; text-align: left;">
+            <h5 style="font-family: var(--font-sans); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #A98456; font-weight: 600; margin: 0 0 12px 0;">{{ t.ik_cert_l }}</h5>
+            <p style="font-family: var(--font-sans); font-size: 15px; color: #444444; font-weight: 400; line-height: 1.8; margin: 0;">{{ t.ik_cert_v }}</p>
+        </div>
+    </section>
+
+    <!-- სასწავლო პროგრამა -->
+    <section style="margin-top: 80px;">
+        <h2 style="font-family: var(--font-serif); font-size: 26px; font-weight: 400; color: #1A1A1A; margin-bottom: 30px;">{{ t.ik_program_h }}</h2>
+
+        <div class="aftercare-timeline">
+            <div class="aftercare-step-row">
+                <div class="step-number-box">01</div>
+                <div class="step-content-box">
+                    <h2>{{ t.ik_m1_t }}</h2>
+                    <p>{{ t.ik_m1_p }}</p>
+                </div>
+            </div>
+            <div class="aftercare-step-row">
+                <div class="step-number-box">02</div>
+                <div class="step-content-box">
+                    <h2>{{ t.ik_m2_t }}</h2>
+                    <p>{{ t.ik_m2_p }}</p>
+                </div>
+            </div>
+            <div class="aftercare-step-row">
+                <div class="step-number-box">03</div>
+                <div class="step-content-box">
+                    <h2>{{ t.ik_m3_t }}</h2>
+                    <p>{{ t.ik_m3_p }}</p>
+                </div>
+            </div>
+            <div class="aftercare-step-row">
+                <div class="step-number-box">04</div>
+                <div class="step-content-box">
+                    <h2>{{ t.ik_m4_t }}</h2>
+                    <p>{{ t.ik_m4_p }}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div style="text-align: center; margin-top: 60px;">
+        <a href="{{ url_for('main.contact') }}" class="capsule-action-btn" style="display: inline-block;">{{ t.ik_cta }}</a>
+    </div>
+
+</div>
+{% endblock %}

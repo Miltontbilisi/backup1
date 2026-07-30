@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}{{ t.ac_title }}{% endblock %}
+
+{% block content %}
+<div class="editorial-page-container">
+
+    <header class="editorial-header">
+        <span class="editorial-subtitle">{{ t.ac_sub }}</span>
+        <h1 class="editorial-title">{{ t.ac_h1 }}</h1>
+        <p class="editorial-desc">{{ t.ac_desc }}</p>
+    </header>
+
+    <div class="aftercare-timeline">
+
+        <div class="aftercare-step-row">
+            <div class="step-number-box">01</div>
+            <div class="step-content-box">
+                <h2>{{ t.ac1_t }}</h2>
+                <span class="step-badge">{{ t.ac1_badge }}</span>
+                <p>{{ t.ac1_p }}</p>
+            </div>
+        </div>
+
+        <div class="aftercare-step-row">
+            <div class="step-number-box">02</div>
+            <div class="step-content-box">
+                <h2>{{ t.ac2_t }}</h2>
+                <span class="step-badge">{{ t.ac2_badge }}</span>
+                <p>{{ t.ac2_p }}</p>
+            </div>
+        </div>
+
+        <div class="aftercare-step-row">
+            <div class="step-number-box">03</div>
+            <div class="step-content-box">
+                <h2>{{ t.ac3_t }}</h2>
+                <span class="step-badge">{{ t.ac3_badge }}</span>
+                <p>{{ t.ac3_p }}</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="{{ lang }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}MILTON | Premium Hair Extensions{% endblock %}</title>
+    <script>
+        // თემის ადრეული დაყენება FOUC-ის თავიდან ასაცილებლად
+        if (localStorage.getItem('milton_theme') === 'dark') {
+            document.documentElement.classList.add('dark-mode');
+        }
+    </script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+
+    <style>
+        /* LUXURY DESIGN SYSTEM VARIABLES */
+        :root {
+            --font-serif: 'Playfair Display', Georgia, serif;
+            --font-sans: 'Inter', -apple-system, sans-serif;
+            --gold-accent: #A98456;
+            --luxury-dark: #1A1A1A;
+            --premium-bg: #FDFBF7;
+            --border-tone: #ECE9E2;
+            --card-bg: #ffffff;
+            --text-main: #1A1A1A;
+            --text-muted: #555555;
+            --promo-bg: #FDFBF7;
+            --promo-border: #F5F2EB;
+        }
+
+        /* PERFECT SYNCHRONIZED DARK MODE VARIABLES */
+        html.dark-mode {
+            --premium-bg: #111111;
+            --luxury-dark: #FDFBF7;
+            --card-bg: #1A1A1A;
+            --text-main: #FDFBF7;
+            --text-muted: #CCCCCC;
+            --border-tone: #2C2A26;
+            --promo-bg: #161616;
+            --promo-border: #2C2A26;
+        }
+
+        body {
+            margin: 0 !important;
+            padding: 0 !important;
+            background-color: var(--premium-bg);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .milton-luxury-header, .milton-luxury-header * {
+            box-sizing: border-box !important;
+            margin: 0;
+            padding: 0;
+            list-style: none !important;
+            text-decoration: none !important;
+        }
+
+        /* ერთხაზოვანი ნავბარის ძირითადი კონტეინერი */
+        .milton-luxury-header {
+            width: 100% !important;
+            background-color: var(--card-bg) !important;
+            border-bottom: 1px solid var(--border-tone) !important;
+            padding: 25px 8% !important; /* 8% საფირმო ჩარჩო */
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+            position: relative !important;
+            z-index: 99999 !important;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .luxe-brand-logo {
+            font-family: var(--font-serif) !important;
+            font-size: 28px !important;
+            letter-spacing: 5px !important;
+            color: var(--text-main) !important;
+            text-transform: uppercase !important;
+            font-weight: 400 !important;
+            transition: color 0.3s;
+        }
+
+        .luxe-nav-list {
+            display: flex !important;
+            flex-direction: row !important;
+            gap: 30px !important;
+            align-items: center !important;
+        }
+
+        .luxe-nav-list > li {
+            position: relative !important;
+        }
+
+        .luxe-nav-link {
+            font-family: var(--font-sans) !important;
+            font-size: 12px !important;
+            text-transform: uppercase !important;
+            letter-spacing: 2px !important;
+            color: var(--text-main) !important;
+            font-weight: 500 !important;
+            transition: color 0.3s !important;
+            padding: 10px 0 !important;
+            display: inline-block !important;
+        }
+
+        .luxe-nav-link:hover, .active-nav {
+            color: var(--gold-accent) !important;
+        }
+
+        .luxe-cart-wrapper {
+            font-size: 18px !important;
+            color: var(--text-main) !important;
+            position: relative !important;
+            transition: color 0.3s;
+        }
+
+        .luxe-cart-wrapper .cart-count {
+            background-color: var(--gold-accent) !important;
+            color: #ffffff !important;
+            font-size: 10px !important;
+            padding: 2px 6px !important;
+            border-radius: 50% !important;
+            position: absolute !important;
+            top: -10px !important;
+            right: -12px !important;
+        }
+
+        /* ენის გადამრთველი */
+        .luxe-nav-icons .luxe-lang-switch {
+            font-family: var(--font-sans) !important;
+            font-size: 11px !important;
+            letter-spacing: 2px !important;
+            color: var(--text-muted) !important;
+            margin-right: 25px !important;
+            font-weight: 500 !important;
+            transition: color 0.3s !important;
+        }
+
+        .luxe-nav-icons .luxe-lang-switch:hover { color: var(--gold-accent) !important; }
+
+        .luxe-nav-icons {
+            display: flex !important;
+            align-items: center !important;
+        }
+
+        /* 🎯 ჩამოსაშლელი გიგანტური პანელი */
+        .luxe-dropdown-menu {
+            display: none !important;
+            position: absolute !important;
+            top: 100% !important;
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+            width: 680px !important;
+            background-color: var(--card-bg) !important;
+            border: 1px solid var(--border-tone) !important;
+            box-shadow: 0 35px 70px rgba(26, 26, 26, 0.08) !important;
+            padding: 40px !important;
+            z-index: 999999 !important;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .luxe-has-dropdown:hover .luxe-dropdown-menu {
+            display: block !important;
+        }
+
+        /* აკადემიისა და მოვლის პატარა დროპდაუნები */
+        .luxe-dropdown-menu.luxe-narrow {
+            width: 280px !important;
+        }
+
+        .luxe-narrow-stack {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 14px !important;
+            text-align: left !important;
+        }
+
+        .luxe-narrow-stack a {
+            font-family: var(--font-sans) !important;
+            font-size: 13.5px !important;
+            color: var(--text-muted) !important;
+            transition: color 0.2s !important;
+        }
+
+        .luxe-narrow-stack a:hover { color: var(--gold-accent) !important; }
+
+        .luxe-mega-grid {
+            display: grid !important;
+            grid-template-columns: repeat(3, 1fr) !important;
+            gap: 25px !important;
+            text-align: left !important;
+        }
+
+        .luxe-mega-col h4 {
+            font-family: var(--font-sans) !important;
+            font-size: 11px !important;
+            letter-spacing: 1.5px !important;
+            color: var(--text-main) !important;
+            margin-bottom: 15px !important;
+            font-weight: 600 !important;
+            text-transform: uppercase !important;
+            border-bottom: 1px solid var(--border-tone) !important;
+            padding-bottom: 8px !important;
+        }
+
+        .luxe-mega-col a {
+            font-family: var(--font-sans) !important;
+            display: block !important;
+            font-size: 13px !important;
+            color: var(--text-muted) !important;
+            margin-bottom: 12px !important;
+            font-weight: 400 !important;
+        }
+
+        .luxe-mega-col a:hover { color: var(--gold-accent) !important; }
+
+        .luxe-promo-col {
+            background-color: var(--promo-bg) !important;
+            padding: 20px !important;
+            border: 1px solid var(--promo-border) !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: center !important;
+        }
+
+        .luxe-promo-col h5 {
+            font-family: var(--font-sans) !important;
+            font-size: 12px !important;
+            letter-spacing: 1px !important;
+            margin-bottom: 6px !important;
+            color: var(--gold-accent) !important;
+            font-weight: 600 !important;
+        }
+
+        .luxe-promo-col p {
+            font-family: var(--font-sans) !important;
+            font-size: 11px !important;
+            color: var(--text-muted) !important;
+            margin-bottom: 15px !important;
+            line-height: 1.5 !important;
+        }
+
+        .luxe-promo-col a {
+            font-family: var(--font-sans) !important;
+            font-size: 11px !important;
+            color: var(--text-main) !important;
+            font-weight: 600 !important;
+        }
+
+        .luxe-theme-toggle {
+            background: none !important;
+            border: none !important;
+            font-size: 16px !important;
+            cursor: pointer !important;
+            margin-right: 22px !important;
+            padding: 0 !important;
+            line-height: 1 !important;
+            color: var(--text-main);
+        }
+
+        .cart-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(20, 18, 15, 0.45);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.35s ease;
+            z-index: 999998;
+        }
+
+        .cart-overlay.open { opacity: 1; visibility: visible; }
+
+        .cart-drawer {
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 100%;
+            width: 390px;
+            max-width: 92vw;
+            background-color: var(--card-bg);
+            box-shadow: -25px 0 60px rgba(26, 26, 26, 0.18);
+            transform: translateX(105%);
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.4, 1);
+            z-index: 999999;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-drawer.open { transform: translateX(0); }
+
+        .cart-drawer-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 22px 25px;
+            border-bottom: 1px solid var(--border-tone);
+        }
+
+        .cart-drawer-head h3 {
+            font-family: var(--font-serif);
+            font-size: 19px;
+            font-weight: 400;
+            color: var(--text-main);
+            margin: 0;
+            letter-spacing: 1px;
+        }
+
+        .cart-close {
+            background: none;
+            border: none;
+            font-size: 16px;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 5px;
+            transition: color 0.2s;
+        }
+
+        .cart-close:hover { color: var(--gold-accent); }
+
+        .cart-items {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 10px 25px;
+        }
+
+        .cart-item-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border-tone);
+        }
+
+        .cart-item-info { flex-grow: 1; min-width: 0; }
+
+        .cart-item-name {
+            font-family: var(--font-sans);
+            font-size: 13.5px;
+            font-weight: 500;
+            color: var(--text-main);
+            margin: 0 0 6px 0;
+            line-height: 1.4;
+        }
+
+        .cart-item-qtyline {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cart-qty-btn {
+            width: 22px;
+            height: 22px;
+            border: 1px solid var(--border-tone);
+            background: var(--card-bg);
+            color: var(--text-main);
+            font-size: 12px;
+            cursor: pointer;
+            line-height: 1;
+            transition: border-color 0.2s;
+        }
+
+        .cart-qty-btn:hover { border-color: var(--gold-accent); color: var(--gold-accent); }
+
+        .cart-item-qty {
+            font-family: var(--font-sans);
+            font-size: 13px;
+            color: var(--text-main);
+            min-width: 18px;
+            text-align: center;
+        }
+
+        .cart-item-line {
+            font-family: var(--font-sans);
+            font-size: 13.5px;
+            font-weight: 600;
+            color: var(--text-main);
+            white-space: nowrap;
+        }
+
+        .cart-item-remove {
+            background: none;
+            border: none;
+            color: #C9C0AE;
+            font-size: 13px;
+            cursor: pointer;
+            padding: 2px 4px;
+            transition: color 0.2s;
+        }
+
+        .cart-item-remove:hover { color: #a54834; }
+
+        .cart-empty-note {
+            font-family: var(--font-sans);
+            font-size: 14px;
+            color: var(--text-muted);
+            font-weight: 300;
+            text-align: center;
+            padding: 50px 25px;
+            display: none;
+            margin: 0;
+        }
+
+        .cart-drawer-foot {
+            border-top: 1px solid var(--border-tone);
+            padding: 20px 25px 25px 25px;
+        }
+
+        .cart-total-row {
+            display: flex;
+            justify-content: space-between;
+            font-family: var(--font-sans);
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 18px;
+        }
+
+        .cart-checkout-btn {
+            display: block;
+            text-align: center;
+            background-color: var(--gold-accent);
+            color: #ffffff !important;
+            font-family: var(--font-sans);
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 500;
+            padding: 15px 0;
+            transition: background-color 0.3s;
+            margin-bottom: 10px;
+        }
+
+        .cart-checkout-btn:hover { background-color: var(--luxury-dark); }
+
+        .cart-continue-btn {
+            display: block;
+            width: 100%;
+            background: none;
+            border: none;
+            font-family: var(--font-sans);
+            font-size: 11.5px;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            cursor: pointer;
+            text-decoration: underline;
+            transition: color 0.2s;
+        }
+
+        .cart-continue-btn:hover { color: var(--gold-accent); }
+
+        .content-wrapper {
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="{% block body_class %}{% endblock %}">
+
+    <header class="milton-luxury-header">
+        <a href="{{ url_for('main.index') }}" class="luxe-brand-logo">MILTON</a>
+
+        <ul class="luxe-nav-list desktop-menu">
+            <li><a href="{{ url_for('main.index') }}" class="luxe-nav-link nav-item">{{ t.nav_home if t else "მთავარი" }}</a></li>
+
+            <li class="luxe-has-dropdown">
+                <a href="#" class="luxe-nav-link nav-item">{{ t.nav_collections if t else "კოლექციები" }} ▾</a>
+                <div class="luxe-dropdown-menu">
+                    <div class="luxe-mega-grid">
+                        <div class="luxe-mega-col">
+                            <h4>{{ t.col_capsule_h if t else "კაფსულები" }}</h4>
+                            <a href="#">{{ t.col_classic if t else "Classic" }}</a>
+                            <a href="#">{{ t.col_micro if t else "Micro" }}</a>
+                            <a href="#">{{ t.col_nano if t else "Nano" }}</a>
+                            <a href="#">{{ t.col_exclusive if t else "Exclusive" }}</a>
+                            <a href="#" style="color: var(--gold-accent) !important; font-weight: 600 !important;">{{ t.nav_compare if t else "შედარება" }}</a>
+                            <a href="#" style="color: var(--gold-accent) !important; font-weight: 600 !important;">{{ t.nav_colormatch if t else "ფერის შერჩევა" }}</a>
+                        </div>
+                        <div class="luxe-mega-col">
+                            <h4>{{ t.col_services_h if t else "სერვისები" }}</h4>
+                            <a href="#">{{ t.col_services_all if t else "ყველა სერვისი" }}</a>
+                            <a href="#">{{ t.col_keratin if t else "კერატინი" }}</a>
+                            <a href="#">{{ t.col_repair if t else "აღდგენა" }}</a>
+                        </div>
+                        <div class="luxe-promo-col">
+                            <h5>{{ t.promo_h if t else "MILTON STUDIO" }}</h5>
+                            <p>{{ t.promo_p if t else "უმაღლესი სეგმენტის იტალიური დაგრძელება." }}</p>
+                            <a href="#">{{ t.promo_link if t else "დეტალურად" }}</a>
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+            <li><a href="{{ url_for('main.prices') }}" class="luxe-nav-link nav-item">{{ t.nav_prices if t else "ფასები" }}</a></li>
+            <li><a href="{{ url_for('main.shop') }}" class="luxe-nav-link nav-item">{{ t.nav_shop if t else "მაღაზია" }}</a></li>
+
+            <li class="luxe-has-dropdown">
+                <a href="#" class="luxe-nav-link nav-item">{{ t.nav_academy if t else "აკადემია" }} ▾</a>
+                <div class="luxe-dropdown-menu luxe-narrow">
+                    <div class="luxe-narrow-stack">
+                        <a href="#">{{ t.academy_overview if t else "მიმოხილვა" }}</a>
+                        <a href="#">{{ t.academy_keratin if t else "კერატინის კურსი" }}</a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="luxe-has-dropdown">
+                <a href="#" class="luxe-nav-link nav-item">{{ t.nav_club if t else "STATUS CLUB" }} ▾</a>
+                <div class="luxe-dropdown-menu luxe-narrow">
+                    <div class="luxe-narrow-stack">
+                        <a href="{{ url_for('main.contact') }}">{{ t.club_vip if t else "VIP წევრობა" }}</a>
+                        <a href="#">{{ t.club_compare if t else "მეთოდების შედარება" }}</a>
+                        <a href="{{ url_for('main.aftercare') }}">{{ t.club_rules if t else "მოვლის წესები" }}</a>
+                        <a href="{{ url_for('main.contact') }}">{{ t.club_color if t else "კონსულტაცია" }}</a>
+                    </div>
+                </div>
+            </li>
+
+            <li><a href="{{ url_for('main.contact') }}" class="luxe-nav-link nav-item">{{ t.nav_contact if t else "კონტაქტი" }}</a></li>
+        </ul>
+
+        <div class="luxe-nav-icons">
+            <a href="#" class="luxe-lang-switch">EN</a>
+            <button type="button" id="themeToggle" class="luxe-theme-toggle" aria-label="Toggle dark mode">🌙</button>
+            <a href="#" class="luxe-cart-wrapper" id="cartOpenBtn">
+                <span id="bagIcon">👜</span>
+                <span class="cart-count" id="cartCount">0</span>
+            </a>
+        </div>
+    </header>
+
+    <main class="content-wrapper">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- 📬 Keep in Touch — მეილის გამოწერა -->
+    <section class="kit-section">
+        <style>
+            .kit-section {
+                background-color: var(--card-bg);
+                border-top: 1px solid var(--border-tone);
+                padding: 70px 8%;
+                text-align: center;
+                transition: background-color 0.3s, border-color 0.3s;
+            }
+            .kit-section h2 {
+                font-family: var(--font-serif);
+                font-size: 30px;
+                font-weight: 400;
+                color: var(--text-main);
+                margin: 0 0 12px 0;
+                letter-spacing: 1px;
+            }
+            .kit-section p {
+                font-family: var(--font-sans);
+                font-size: 14px;
+                color: var(--text-muted);
+                font-weight: 300;
+                line-height: 1.7;
+                max-width: 520px;
+                margin: 0 auto 30px auto;
+            }
+            .kit-form {
+                display: flex;
+                justify-content: center;
+                gap: 0;
+                max-width: 480px;
+                margin: 0 auto;
+            }
+            .kit-form input {
+                flex-grow: 1;
+                border: 1px solid var(--border-tone);
+                border-right: none;
+                background-color: var(--premium-bg);
+                padding: 15px 18px;
+                font-family: var(--font-sans);
+                font-size: 13.5px;
+                color: var(--text-main);
+                outline: none;
+                min-width: 0;
+                transition: background-color 0.3s, border-color 0.3s;
+            }
+            .kit-form input:focus { border-color: var(--gold-accent); }
+            .kit-form button {
+                background-color: var(--text-main);
+                color: var(--premium-bg);
+                border: none;
+                font-family: var(--font-sans);
+                font-size: 11px;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                font-weight: 500;
+                padding: 15px 32px;
+                cursor: pointer;
+                transition: background-color 0.3s, color 0.3s;
+                white-space: nowrap;
+            }
+            .kit-form button:hover { background-color: var(--gold-accent); color: #ffffff; }
+            .kit-msg {
+                font-family: var(--font-sans);
+                font-size: 13px;
+                margin-top: 15px;
+                display: none;
+            }
+            .kit-msg.ok { color: #4a7c46; display: block; }
+            .kit-msg.err { color: #a54834; display: block; }
+            @media (max-width: 560px) {
+                .kit-form { flex-direction: column; gap: 10px; }
+                .kit-form input { border-right: 1px solid var(--border-tone); }
+            }
+        </style>
+        <h2>{{ t.kit_h if t else "Keep in Touch" }}</h2>
+        <p>{{ t.kit_p if t else "გამოიწერეთ სიახლეები ექსკლუზიური შეთავაზებების მისაღებად." }}</p>
+        <form class="kit-form" id="kitForm">
+            <input type="email" id="kitEmail" placeholder="{{ t.kit_ph if t else "თქვენი ელ-ფოსტა" }}" required autocomplete="email">
+            <button type="submit">{{ t.kit_btn if t else "გამოწერა" }}</button>
+        </form>
+        <p class="kit-msg" id="kitMsg"></p>
+    </section>
+
+    <footer class="main-footer">
+        <style>
+            .main-footer {
+                background-color: var(--card-bg);
+                border-top: 1px solid var(--border-tone);
+                padding: 80px 8%;
+                font-family: var(--font-sans);
+                transition: background-color 0.3s, border-color 0.3s;
+            }
+            .footer-container {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 40px;
+            }
+            .footer-logo {
+                font-family: var(--font-serif);
+                font-size: 22px;
+                letter-spacing: 2px;
+                margin-bottom: 20px;
+                color: var(--text-main);
+            }
+            .footer-desc {
+                font-size: 13px;
+                color: var(--text-muted);
+                line-height: 1.6;
+                font-weight: 300;
+            }
+            .footer-links-block h3, .footer-contact h3 {
+                font-size: 11px;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                margin-bottom: 20px;
+                font-weight: 600;
+                color: var(--text-main);
+            }
+            .footer-links {
+                list-style: none;
+                padding: 0;
+            }
+            .footer-links li {
+                margin-bottom: 12px;
+            }
+            .footer-links a {
+                text-decoration: none;
+                color: var(--text-muted);
+                font-size: 13px;
+                transition: color 0.2s;
+            }
+            .footer-links a:hover { color: var(--gold-accent); }
+            .footer-contact p {
+                font-size: 13px;
+                color: var(--text-muted);
+                margin-bottom: 12px;
+                line-height: 1.6;
+            }
+            @media (max-width: 768px) {
+                .footer-container { grid-template-columns: 1fr; gap: 40px; }
+            }
+        </style>
+        <div class="footer-container">
+            <div class="footer-info">
+                <h2 class="footer-logo">MILTON TBILISI</h2>
+                <p class="footer-desc">{{ t.footer_desc if t else "პრემიუმ კლასის თმის სტუდია." }}</p>
+            </div>
+           <div class="footer-links-block">
+                <h3>{{ t.footer_nav_h if t else "ნავიგაცია" }}</h3>
+                <ul class="footer-links">
+                    <li><a href="{{ url_for('main.index') }}">{{ t.nav_home if t else "მთავარი" }}</a></li>
+                    <li><a href="#">{{ t.footer_services if t else "სერვისები" }}</a></li>
+                    <li><a href="{{ url_for('main.prices') }}">{{ t.footer_prices if t else "ფასები" }}</a></li>
+                    <li><a href="{{ url_for('main.shop') }}">{{ t.nav_shop if t else "მაღაზია" }}</a></li>
+                    <li><a href="{{ url_for('main.aftercare') }}">{{ t.footer_haircare if t else "მოვლა" }}</a></li>
+                    <li><a href="{{ url_for('main.contact') }}">{{ t.nav_contact if t else "კონტაქტი" }}</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h3>{{ t.footer_contact_h if t else "კონტაქტები" }}</h3>
+                <p>{{ t.footer_address if t else "თბილისი, საქართველო" }}</p>
+                <p><a href="tel:+995322141300" style="color: inherit;">{{ t.footer_phone if t else "+995 32 214 13 00" }}</a></p>
+                <p><a href="mailto:miltontbilisi@gmail.com" style="color: inherit;">miltontbilisi@gmail.com</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const currentPath = window.location.pathname;
+            const navLinks = document.querySelectorAll('.desktop-menu .nav-item');
+
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPath) {
+                    link.classList.add('active-nav');
+                }
+            });
+
+            const themeBtn = document.getElementById('themeToggle');
+            function syncThemeIcon() {
+                const isDark = document.documentElement.classList.contains('dark-mode');
+                themeBtn.textContent = isDark ? '☀️' : '🌙';
+            }
+            themeBtn.addEventListener('click', function() {
+                const dark = document.documentElement.classList.toggle('dark-mode');
+                localStorage.setItem('milton_theme', dark ? 'dark' : 'light');
+                syncThemeIcon();
+            });
+            syncThemeIcon();
+
+            const drawer = document.getElementById('cartDrawer');
+            const overlay = document.getElementById('cartOverlay');
+            const itemsBox = document.getElementById('cartItems');
+
+            function getCart() {
+                try { return JSON.parse(localStorage.getItem('milton_cart')) || []; }
+                catch (e) { return []; }
+            }
+
+            function saveCart(cart) {
+                localStorage.setItem('milton_cart', JSON.stringify(cart));
+            }
+
+            function renderCart() {
+                const cart = getCart();
+                const totalQty = cart.reduce((s, i) => s + i.qty, 0);
+                const totalPrice = cart.reduce((s, i) => s + i.qty * i.price, 0);
+
+                const counterEl = document.getElementById('cartCount');
+                counterEl.textContent = totalQty;
+                counterEl.style.display = totalQty > 0 ? 'flex' : 'none';
+                document.getElementById('cartDrawerCount').textContent = totalQty;
+                document.getElementById('cartTotal').textContent = totalPrice.toFixed(2) + ' ₾';
+
+                itemsBox.innerHTML = '';
+                cart.forEach(item => {
+                    const row = document.createElement('div');
+                    row.className = 'cart-item-row';
+
+                    const info = document.createElement('div');
+                    info.className = 'cart-item-info';
+                    const name = document.createElement('p');
+                    name.className = 'cart-item-name';
+                    name.textContent = item.name;
+
+                    const qtyline = document.createElement('div');
+                    qtyline.className = 'cart-item-qtyline';
+                    const minus = document.createElement('button');
+                    minus.className = 'cart-qty-btn'; minus.textContent = '−';
+                    minus.onclick = () => changeItemQty(item.id, -1);
+                    const qty = document.createElement('span');
+                    qty.className = 'cart-item-qty'; qty.textContent = item.qty;
+                    const plus = document.createElement('button');
+                    plus.className = 'cart-qty-btn'; plus.textContent = '+';
+                    plus.onclick = () => changeItemQty(item.id, 1);
+                    qtyline.append(minus, qty, plus);
+                    info.append(name, qtyline);
+
+                    const line = document.createElement('span');
+                    line.className = 'cart-item-line';
+                    line.textContent = (item.qty * item.price).toFixed(2) + ' ₾';
+
+                    row.append(info, line);
+                    itemsBox.appendChild(row);
+                });
+            }
+
+            function changeItemQty(id, delta) {
+                const cart = getCart();
+                const item = cart.find(i => i.id === id);
+                if (!item) return;
+                item.qty += delta;
+                if (item.qty < 1) cart.splice(cart.indexOf(item), 1);
+                saveCart(cart);
+                renderCart();
+            }
+
+            window.miltonOpenCart = function() {
+                drawer.classList.add('open');
+                overlay.classList.add('open');
+            };
+            window.miltonCloseCart = function() {
+                drawer.classList.remove('open');
+                overlay.classList.remove('open');
+            };
+            document.getElementById('cartOpenBtn').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.miltonOpenCart();
+            });
+            document.getElementById('cartCloseBtn').addEventListener('click', window.miltonCloseCart);
+            overlay.addEventListener('click', window.miltonCloseCart);
+
+            renderCart();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,274 @@
+{% extends "base.html" %}
+
+{% block title %}{{ t.cm_title }}{% endblock %}
+
+{% block content %}
+<style>
+    /* ─── ორი ნაბიჯის ინსტრუქცია ─── */
+    .cm-steps {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 25px;
+        margin: 50px 0 60px 0;
+    }
+
+    .cm-step {
+        background-color: #FDFBF7;
+        border: 1px solid #ECE9E2;
+        padding: 35px 40px;
+        text-align: left;
+    }
+
+    .cm-step h3 {
+        font-family: var(--font-sans);
+        font-size: 12px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #A98456;
+        font-weight: 600;
+        margin: 0 0 12px 0;
+    }
+
+    .cm-step p {
+        font-family: var(--font-sans);
+        font-size: 13.5px;
+        color: #555;
+        font-weight: 300;
+        line-height: 1.7;
+        margin: 0;
+    }
+
+    /* ─── კატეგორიის ტაბები ─── */
+    .cm-tabs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+        margin-bottom: 45px;
+    }
+
+    .cm-tab {
+        font-family: var(--font-sans);
+        font-size: 11px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        font-weight: 500;
+        color: #555;
+        background-color: #ffffff;
+        border: 1px solid #ECE9E2;
+        padding: 10px 18px;
+        cursor: pointer;
+        transition: all 0.25s ease;
+    }
+
+    .cm-tab:hover { border-color: #A98456; color: #A98456; }
+
+    .cm-tab.active {
+        background-color: #1A1A1A;
+        border-color: #1A1A1A;
+        color: #ffffff;
+    }
+
+    /* ─── სვოჩების გრიდი ─── */
+    .cm-grid {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 28px 20px;
+    }
+
+    .cm-swatch-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        text-align: center;
+    }
+
+    /* თმის სვოჩი — გრძელი მომრგვალებული ზოლი, ზემოთ რგოლით */
+    .cm-swatch {
+        width: 100%;
+        max-width: 110px;
+        aspect-ratio: 11 / 26;
+        border-radius: 55px 55px 45px 45px / 30px 30px 22px 22px;
+        position: relative;
+        box-shadow: inset -8px 0 14px rgba(0,0,0,0.18), inset 8px 0 14px rgba(255,255,255,0.06), 0 12px 22px rgba(26,26,26,0.12);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .cm-swatch::before {
+        content: '';
+        position: absolute;
+        top: -13px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 26px;
+        height: 26px;
+        border: 3px solid #C9C0AE;
+        border-radius: 50%;
+        background: transparent;
+    }
+
+    .cm-swatch::after {
+        /* ბზინვარების ეფექტი */
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,0.14) 45%, transparent 60%);
+    }
+
+    .cm-swatch-card:hover .cm-swatch {
+        transform: translateY(-6px);
+        box-shadow: inset -8px 0 14px rgba(0,0,0,0.18), inset 8px 0 14px rgba(255,255,255,0.06), 0 22px 34px rgba(26,26,26,0.2);
+    }
+
+    .cm-code {
+        font-family: var(--font-sans);
+        font-size: 13px;
+        font-weight: 600;
+        color: #1A1A1A;
+        margin: 4px 0 0 0;
+    }
+
+    .cm-name {
+        font-family: var(--font-sans);
+        font-size: 12px;
+        color: #888;
+        font-weight: 300;
+        margin: 0;
+    }
+
+    .cm-group-tag {
+        font-family: var(--font-sans);
+        font-size: 9px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: #B5AD9C;
+        font-weight: 600;
+        margin: 0;
+    }
+
+    /* ─── სერვისის ბლოკი ─── */
+    .cm-service {
+        margin-top: 80px;
+        background-color: #1A1A1A;
+        padding: 55px 8%;
+        text-align: center;
+    }
+
+    .cm-service h2 {
+        font-family: var(--font-serif);
+        font-size: 26px;
+        font-weight: 400;
+        color: #ffffff;
+        margin: 0 0 15px 0;
+    }
+
+    .cm-service p {
+        font-family: var(--font-sans);
+        font-size: 13.5px;
+        color: #BBB5A8;
+        font-weight: 300;
+        line-height: 1.8;
+        max-width: 640px;
+        margin: 0 auto 25px auto;
+    }
+
+    .cm-service a {
+        display: inline-block;
+        background-color: #A98456;
+        color: #ffffff !important;
+        font-family: var(--font-sans);
+        font-size: 11px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        font-weight: 500;
+        padding: 15px 40px;
+        transition: background-color 0.3s;
+    }
+
+    .cm-service a:hover { background-color: #8d6c42; }
+
+    @media (max-width: 1150px) {
+        .cm-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+
+    @media (max-width: 780px) {
+        .cm-steps { grid-template-columns: 1fr; }
+        .cm-grid { grid-template-columns: repeat(3, 1fr); gap: 22px 12px; }
+    }
+
+    @media (max-width: 480px) {
+        .cm-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+</style>
+
+<div class="editorial-page-container">
+
+    <header class="editorial-header">
+        <span class="editorial-subtitle">{{ t.cm_sub }}</span>
+        <h1 class="editorial-title">{{ t.cm_h1 }}</h1>
+        <p class="editorial-desc">{{ t.cm_desc }}</p>
+    </header>
+
+    <!-- ორი ნაბიჯი -->
+    <div class="cm-steps">
+        <div class="cm-step">
+            <h3>{{ t.cm_step1_t }}</h3>
+            <p>{{ t.cm_step1_p }}</p>
+        </div>
+        <div class="cm-step">
+            <h3>{{ t.cm_step2_t }}</h3>
+            <p>{{ t.cm_step2_p }}</p>
+        </div>
+    </div>
+
+    <!-- კატეგორიის ტაბები -->
+    <div class="cm-tabs">
+        <button type="button" class="cm-tab active" data-group="all">{{ t.grp_all }}</button>
+        {% for g in groups %}
+        <button type="button" class="cm-tab" data-group="{{ g }}">{{ t['grp_' ~ g] }}</button>
+        {% endfor %}
+    </div>
+
+    <!-- სვოჩების გრიდი -->
+    <div class="cm-grid" id="cmGrid">
+        {% for c in colors %}
+        <div class="cm-swatch-card" data-group="{{ c.group }}">
+            <div class="cm-swatch" style="background: {{ c.css }};"></div>
+            <div>
+                <p class="cm-code">{{ c.code }}</p>
+                <p class="cm-name">{{ c.name }}</p>
+                <p class="cm-group-tag">{{ t['grp_' ~ c.group] }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- სვოჩების სერვისი -->
+    <section class="cm-service">
+        <h2>{{ t.cm_service_h }}</h2>
+        <p>{{ t.cm_service_p }}</p>
+        <a href="{{ url_for('main.contact') }}">{{ t.btn_consult }}</a>
+    </section>
+
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const tabs = document.querySelectorAll('.cm-tab');
+    const cards = document.querySelectorAll('.cm-swatch-card');
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            tabs.forEach(other => other.classList.remove('active'));
+            this.classList.add('active');
+            const group = this.dataset.group;
+            cards.forEach(card => {
+                card.style.display = (group === 'all' || card.dataset.group === group) ? 'flex' : 'none';
+            });
+        });
+    });
+});
+</script>
+{% endblock %}

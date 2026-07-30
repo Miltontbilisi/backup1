@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}{{ t.svc_title }}{% endblock %}
+
+{% block content %}
+<div class="editorial-page-container">
+
+    <header class="editorial-header">
+        <span class="editorial-subtitle">{{ t.svc_sub }}</span>
+        <h1 class="editorial-title">{{ t.svc_h1 }}</h1>
+        <p class="editorial-desc">{{ t.svc_desc }}</p>
+    </header>
+
+    <div class="editorial-services-list">
+
+        <div class="editorial-service-row">
+            <span class="service-num">I</span>
+            <div class="service-details">
+                <h2>{{ t.svc1_t }}</h2>
+                <p>{{ t.svc1_p }}</p>
+            </div>
+        </div>
+
+        <div class="editorial-service-row">
+            <span class="service-num">II</span>
+            <div class="service-details">
+                <h2>{{ t.svc2_t }}</h2>
+                <p>{{ t.svc2_p }}</p>
+            </div>
+        </div>
+
+        <div class="editorial-service-row">
+            <span class="service-num">III</span>
+            <div class="service-details">
+                <h2>{{ t.svc3_t }}</h2>
+                <p>{{ t.svc3_p }}</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

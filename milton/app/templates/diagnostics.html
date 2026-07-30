@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MILTON | თმის ინდივიდუალური დიაგნოსტიკა</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold-accent: #A98456;
+            --dark-slate: #1A1A1A;
+            --bg-cream: #FDFBF7;
+            --border-delicate: #ECE9E2;
+            --global-padding: 8%;
+        }
+
+        body {
+            background-color: var(--bg-cream);
+            color: var(--dark-slate);
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .milton-container {
+            padding-left: var(--global-padding);
+            padding-right: var(--global-padding);
+            box-sizing: border-box;
+            max-width: 100%;
+        }
+
+        .diagnostics-header {
+            text-align: center;
+            margin-top: 100px;
+            margin-bottom: 70px;
+        }
+
+        .diagnostics-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 46px;
+            font-weight: 400;
+            letter-spacing: -0.5px;
+            margin-bottom: 20px;
+        }
+
+        .diagnostics-header p {
+            font-size: 15px;
+            color: #555555;
+            max-width: 650px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .diagnostics-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 70px;
+            align-items: start;
+            margin-bottom: 120px;
+        }
+
+        .quiz-card {
+            background: #FFFFFF;
+            border: 1px solid var(--border-delicate);
+            padding: 50px;
+            box-sizing: border-box;
+        }
+
+        .quiz-group {
+            margin-bottom: 35px;
+        }
+
+        .quiz-group label {
+            display: block;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 18px;
+            color: var(--dark-slate);
+            font-weight: 600;
+        }
+
+        .quiz-options select {
+            width: 100%;
+            padding: 18px;
+            border: 1px solid var(--border-delicate);
+            background-color: var(--bg-cream);
+            font-size: 14px;
+            color: var(--dark-slate);
+            outline: none;
+            cursor: pointer;
+            appearance: none;
+            -webkit-appearance: none;
+        }
+
+        .luxury-submit-btn {
+            background-color: var(--dark-slate);
+            color: #FFFFFF;
+            border: 1px solid var(--dark-slate);
+            padding: 20px 35px;
+            font-size: 12px;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .luxury-submit-btn:hover {
+            background-color: var(--gold-accent);
+            border-color: var(--gold-accent);
+        }
+
+        .recommendation-card {
+            background-color: #FFFFFF;
+            border: 1px solid var(--border-delicate);
+            padding: 50px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .recommendation-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 30px;
+            color: var(--dark-slate);
+            margin-top: 0;
+            margin-bottom: 8px;
+        }
+
+        .recommendation-card img, .recommendation-card video {
+            width: 100%;
+            height: 320px;
+            object-fit: contain;
+            margin: 30px 0;
+            border: 1px solid var(--border-delicate);
+            background-color: var(--bg-cream);
+        }
+
+        .expert-badge {
+            background-color: var(--gold-accent);
+            color: #FFFFFF;
+            display: inline-block;
+            padding: 6px 14px;
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+        }
+
+        .placeholder-state {
+            border: 1px dashed var(--border-delicate);
+            padding: 100px 40px;
+            text-align: center;
+            color: #888888;
+            font-style: italic;
+            font-size: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="milton-container">
+        <div class="diagnostics-header">
+            <h1>თმის ინდივიდუალური დიაგნოსტიკა</h1>
+            <p>გაიარეთ Milton Studio-ს წამყვანი სტილისტების მიერ ინჟინერირებული მოკლე კითხვარი და მიიღეთ ზუსტი მეცნიერული ფორმულა თქვენი თმის პრემიუმ მოვლისთვის.</p>
+        </div>
+
+        <div class="diagnostics-grid">
+            <div class="quiz-card">
+                <form method="POST" action="/diagnostics">
+                    <div class="quiz-group">
+                        <label for="hair_type">აირჩიეთ თქვენი თმის მიმდინარე კლინიკური მდგომარეობა:</label>
+                        <select name="hair_type" id="hair_type" class="quiz-options">
+                            <option value="damaged">მოლეკულურად დაზიანებული, დასუსტებული სტრუქტურა</option>
+                            <option value="extended">დაგრძელებული თმა (იტალიური მიკრო-კაფსულები)</option>
+                            <option value="dry">დეჰიდრირებული, მშრალი ან მგრძნობიარე სკალპი</option>
+                            <option value="colored">შეღებილი, პიგმენტგახუნებული ტექსტურა</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="luxury-submit-btn">დიაგნოსტიკის გენერირება</button>
+                </form>
+            </div>
+
+            <div class="recommendation-result">
+                {% if product %}
+                    <div class="recommendation-card">
+                        <span class="expert-badge">MILTON EXPERT PRESCRIPTION</span>
+                        <h3>{{ product.name }}</h3>
+                        <p style="font-style: italic; color: var(--gold-accent); font-size: 14px; margin: 0;">{{ product.sub }}</p>
+
+                        {% if product.is_video %}
+                            <video autoplay loop muted playsinline>
+                                <source src="{{ url_for('static', filename='video/' + product.image) }}" type="video/mp4">
+                            </video>
+                        {% else %}
+                            <img src="{{ url_for('static', filename='img/products/' + product.image) }}" alt="{{ product.name }}">
+                        {% endif %}
+
+                        <p style="font-size: 14px; line-height: 1.7; color: #444444; text-align: left; margin: 25px 0;">
+                            {{ product.desc }}
+                        </p>
+
+                        <a href="/shop/product/{{ product.id }}" style="text-decoration: none;">
+                            <button class="luxury-submit-btn">ფორმულის სრული ანალიზი</button>
+                        </a>
+                    </div>
+                {% else %}
+                    <div class="placeholder-state">
+                        შეავსეთ კითხვარი მარცხენა პანელში, რათა სისტემამ დინამიურად მოახდინოს იდეალური მოვლის საშუალების გენერირება.
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

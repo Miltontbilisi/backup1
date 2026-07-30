@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+
+{% block title %}{{ t.pr_title }}{% endblock %}
+
+{% block content %}
+<div class="editorial-page-container reveal" style="padding: 60px 8% 100px 8%;">
+
+    <header class="editorial-header" style="text-align: center; margin-bottom: 50px;">
+        <span class="editorial-subtitle">{{ t.pr_sub }}</span>
+        <h1 class="editorial-title" style="font-family: var(--font-serif); font-size: 36px; font-weight: 400; margin-bottom: 15px;">{{ t.pr_h1 }}</h1>
+        <p class="editorial-desc" style="color: #666; font-weight: 300; max-width: 600px; margin: 0 auto;">{{ t.pr_desc }}</p>
+    </header>
+
+    <div class="calculator-editorial-layout" style="display: flex; gap: 60px; align-items: flex-start; margin-top: 40px;">
+
+        <div class="calc-form-container" style="width: 55%; display: flex; flex-direction: column; gap: 25px; text-align: left;">
+
+            <div class="calc-field-group">
+                <label style="font-size: 11px; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; display: block; margin-bottom: 10px; color: #1a1a1a;">{{ t.pr_hair_cat }}</label>
+                <select id="hairType" onchange="calculateLuxePrice()" style="width: 100%; padding: 14px; border: 1px solid #ECE9E2; background-color: #FDFBF7; outline: none; font-family: inherit; font-size: 13.5px; color: #1a1a1a;">
+                    <option value="premium" data-price="28">{{ t.pr_hair_opt1 }}</option>
+                    <option value="luxe" data-price="35">{{ t.pr_hair_opt2 }}</option>
+                    <option value="exclusive" data-price="42">{{ t.pr_hair_opt3 }}</option>
+                </select>
+            </div>
+
+            <div class="calc-field-group">
+                <label style="font-size: 11px; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; display: block; margin-bottom: 10px; color: #1a1a1a;">{{ t.pr_length }}</label>
+                <select id="hairLength" onchange="calculateLuxePrice()" style="width: 100%; padding: 14px; border: 1px solid #ECE9E2; background-color: #FDFBF7; outline: none; font-family: inherit; font-size: 13.5px; color: #1a1a1a;">
+                    <option value="50" data-mult="1.0">50 {{ t.pr_cm }}</option>
+                    <option value="60" data-mult="1.2">60 {{ t.pr_cm }}</option>
+                    <option value="70" data-mult="1.4">70 {{ t.pr_cm }}</option>
+                    <option value="80" data-mult="1.6">80 {{ t.pr_cm }}</option>
+                </select>
+            </div>
+
+            <div class="calc-field-group">
+                <label style="font-size: 11px; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; display: block; margin-bottom: 10px; color: #1a1a1a;">{{ t.pr_master }}</label>
+                <select id="masterCat" onchange="calculateLuxePrice()" style="width: 100%; padding: 14px; border: 1px solid #ECE9E2; background-color: #FDFBF7; outline: none; font-family: inherit; font-size: 13.5px; color: #1a1a1a;">
+                    <option value="regular" data-work="1.5">Regular Master</option>
+                    <option value="top" data-work="2.0">Top Master</option>
+                    <option value="art" data-work="2.5">Art Director</option>
+                </select>
+            </div>
+
+            <div class="calc-field-group">
+                <label style="font-size: 11px; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; display: block; margin-bottom: 10px; color: #1a1a1a;">{{ t.pr_service }}</label>
+                <select id="salonService" onchange="calculateLuxePrice()" style="width: 100%; padding: 14px; border: 1px solid #ECE9E2; background-color: #FDFBF7; outline: none; font-family: inherit; font-size: 13.5px; color: #1a1a1a;">
+                    <option value="extensions">{{ t.pr_svc_opt1 }}</option>
+                    <option value="correction">{{ t.pr_svc_opt2 }}</option>
+                </select>
+            </div>
+
+            <div class="calc-field-group">
+                <label style="font-size: 11px; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; display: flex; justify-content: space-between; margin-bottom: 10px; color: #1a1a1a;">
+                    {{ t.pr_capsules }} <span id="capsuleVal" style="color: #A98456; font-weight: 600;">50 {{ t.pr_pcs }}</span>
+                </label>
+                <input type="range" id="hairCapsules" min="20" max="600" step="10" value="50" oninput="updateCapsuleLabel()" style="width: 100%; accent-color: #A98456; cursor: pointer;">
+            </div>
+
+            <div class="calc-field-group">
+                <label style="font-size: 11px; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; display: flex; justify-content: space-between; margin-bottom: 10px; color: #1a1a1a;">
+                    {{ t.pr_weight }} <span id="weightVal" style="color: #A98456; font-weight: 600;">100 {{ t.pr_grams }}</span>
+                </label>
+                <input type="range" id="hairWeight" min="20" max="300" step="10" value="100" oninput="updateWeightLabel()" style="width: 100%; accent-color: #A98456; cursor: pointer;">
+            </div>
+
+        </div>
+
+        <div class="calc-summary-panel" style="width: 45%; background-color: #FDFBF7; border: 1px solid #ECE9E2; padding: 40px; text-align: left; box-shadow: 0 20px 40px rgba(0,0,0,0.02); position: sticky; top: 40px;">
+            <h2 style="font-family: var(--font-serif); font-size: 26px; font-weight: 400; margin-bottom: 30px; color: #1A1A1A;">{{ t.pr_summary }}</h2>
+
+            <div class="summary-line" style="display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 14.5px; color: #444; font-weight: 300;">
+                <span>{{ t.pr_sum_hair }}</span>
+                <span id="sumHairBase" style="font-weight: 500; color: #1A1A1A;">0 ₾</span>
+            </div>
+
+            <div class="summary-line" style="display: flex; justify-content: space-between; margin-bottom: 25px; font-size: 14.5px; color: #444; font-weight: 300;">
+                <span>{{ t.pr_sum_work }}</span>
+                <span id="sumWorkBase" style="font-weight: 500; color: #1A1A1A;">0 ₾</span>
+            </div>
+
+            <div class="summary-total-line" style="display: flex; justify-content: space-between; border-top: 1px solid #ECE9E2; padding-top: 25px; font-size: 20px; font-weight: 500; color: #1A1A1A;">
+                <span>{{ t.pr_sum_total }}</span>
+                <span id="sumTotal" style="color: #A98456; font-family: var(--font-serif); font-weight: 600;">0 ₾</span>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+const UNIT_PCS = "{{ t.pr_pcs }}";
+const UNIT_GRAMS = "{{ t.pr_grams }}";
+
+function updateCapsuleLabel() {
+    const caps = document.getElementById('hairCapsules').value;
+    document.getElementById('capsuleVal').textContent = caps + " " + UNIT_PCS;
+    calculateLuxePrice();
+}
+
+function updateWeightLabel() {
+    const weight = document.getElementById('hairWeight').value;
+    document.getElementById('weightVal').textContent = weight + " " + UNIT_GRAMS;
+    calculateLuxePrice();
+}
+
+function calculateLuxePrice() {
+    const typeSelect = document.getElementById('hairType');
+    const basePricePer10g = parseFloat(typeSelect.options[typeSelect.selectedIndex].getAttribute('data-price'));
+
+    const lengthSelect = document.getElementById('hairLength');
+    const lengthMultiplier = parseFloat(lengthSelect.options[lengthSelect.selectedIndex].getAttribute('data-mult'));
+
+    const masterSelect = document.getElementById('masterCat');
+    const masterWorkRate = parseFloat(masterSelect.options[masterSelect.selectedIndex].getAttribute('data-work'));
+
+    const serviceSelect = document.getElementById('salonService').value;
+
+    const weightGrams = parseInt(document.getElementById('hairWeight').value);
+    const capsuleCount = parseInt(document.getElementById('hairCapsules').value);
+
+    // 1. თმის ფასი გრამების და სიგრძის მიხედვით
+    const hairCost = (weightGrams / 10) * basePricePer10g * lengthMultiplier;
+
+    // 2. სამუშაოს ფასი კაფსულების მიხედვით
+    let serviceMultiplier = 1.0;
+    if (serviceSelect === "correction") {
+        serviceMultiplier = 1.8; // კორექციის კოეფიციენტი
+    }
+    const workCost = capsuleCount * masterWorkRate * serviceMultiplier;
+
+    const totalCost = hairCost + workCost;
+
+    document.getElementById('sumHairBase').textContent = Math.round(hairCost) + " ₾";
+    document.getElementById('sumWorkBase').textContent = Math.round(workCost) + " ₾";
+    document.getElementById('sumTotal').textContent = Math.round(totalCost) + " ₾";
+}
+
+document.addEventListener("DOMContentLoaded", calculateLuxePrice);
+</script>
+{% endblock %}
