@@ -1,12 +1,11 @@
-from flask import render_template, request
+from flask import render_template
 from app.main import main_bp
 
-# MILTON პლატფორმის პრემიუმ პროდუქტების ცენტრალური მონაცემთა ბაზა
 PRODUCTS_DB = [
     {
         'id': 1, 'brand': "L'ORÉAL PROFESSIONNEL", 'name': "Absolut Repair Molecular",
         'sub': "ინოვაციური მოლეკულური შამპუნი", 'price': "115.00",
-        'image': "absolut-repair.mp4.mp4", 'is_video': True, 'collection': "absolut",
+        'image': "shampoo-3d.mp4.mp4", 'is_video': True, 'collection': "absolut",
         'type': "shampoo", 'hair_type': "damaged", 'benefit': "repair",
         'desc': "პატენტური მოლეკულური ფორმულა, რომელიც აღადგენს თმის დაზიანებულ სტრუქტურას შიგნიდან.",
         'usage': "დაიტანეთ სველ თმაზე, ნაზად დაიმასაჟეთ კაფსულების ზონაში და კარგად ჩამოიბანეთ."
@@ -71,16 +70,6 @@ def product_detail(product_id):
     related = [p for p in PRODUCTS_DB if p['id'] != product_id][:3]
     return render_template('product_detail.html', product=product, related=related)
 
-# --- გეგმა 1: თმის ინტელექტუალური დიაგნოსტიკის უსაფრთხო მარშრუტი ---
-@main_bp.route('/diagnostics', methods=['GET', 'POST'])
-def diagnostics():
-    recommended_product = None
-    if request.method == 'POST':
-        hair_type = request.form.get('hair_type')
-        recommended_product = next((p for p in PRODUCTS_DB if p['hair_type'] == hair_type), PRODUCTS_DB[0])
-    return render_template('diagnostics.html', product=recommended_product)
-
-# --- გეგმა 2: იტალიური დაგრძელების საინფორმაციო მარშრუტი ---
-@main_bp.route('/extensions')
-def extensions():
-    return render_template('extensions.html')
+@main_bp.route('/diagnostic')
+def diagnostic():
+    return render_template('diagnostics.html')
