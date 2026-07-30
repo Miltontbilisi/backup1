@@ -1,142 +1,317 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MILTON STUDIO | ღირებულების კალკულატორი</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold-accent: #A98456;
+            --dark-slate: #1A1A1A;
+            --card-bg: #222222;
+            --border-warm: rgba(169, 132, 86, 0.25);
+            --global-padding: 8%;
+        }
 
-{% block title %}{{ t.pr_title }}{% endblock %}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-{% block content %}
-<div class="editorial-page-container reveal" style="padding: 60px 8% 100px 8%;">
+        body {
+            background-color: var(--dark-slate);
+            color: #FFFFFF;
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+        }
 
-    <header class="editorial-header" style="text-align: center; margin-bottom: 50px;">
-        <span class="editorial-subtitle">{{ t.pr_sub }}</span>
-        <h1 class="editorial-title" style="font-family: var(--font-serif); font-size: 36px; font-weight: 400; margin-bottom: 15px;">{{ t.pr_h1 }}</h1>
-        <p class="editorial-desc" style="color: #666; font-weight: 300; max-width: 600px; margin: 0 auto;">{{ t.pr_desc }}</p>
+        header {
+            padding: 30px var(--global-padding);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            letter-spacing: 4px;
+            color: #FFFFFF;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--gold-accent);
+        }
+
+        nav a {
+            color: #E0E0E0;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 13px;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--gold-accent);
+        }
+
+        .calculator-container {
+            max-width: 1000px;
+            margin: 60px auto;
+            padding: 0 var(--global-padding);
+        }
+
+        .title-block {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .title-block h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 38px;
+            font-weight: 400;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .title-block p {
+            font-size: 13px;
+            color: #A0A0A0;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .calc-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-warm);
+            padding: 40px;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .calc-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            letter-spacing: 1px;
+            color: var(--gold-accent);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .select-input, .range-input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #FFFFFF;
+            padding: 14px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .select-input:focus {
+            border-color: var(--gold-accent);
+        }
+
+        .select-input option {
+            background: var(--dark-slate);
+            color: #FFFFFF;
+        }
+
+        .val-display {
+            float: right;
+            color: #FFFFFF;
+            font-weight: 600;
+        }
+
+        /* Result Panel */
+        .result-panel {
+            background: rgba(169, 132, 86, 0.08);
+            border: 1px solid var(--gold-accent);
+            padding: 35px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .result-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            color: var(--gold-accent);
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .price-breakdown {
+            margin-bottom: 25px;
+        }
+
+        .breakdown-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            margin-bottom: 12px;
+            color: #CCCCCC;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+            padding-bottom: 8px;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid var(--gold-accent);
+        }
+
+        .total-price {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            color: var(--gold-accent);
+            font-weight: 600;
+        }
+
+        .book-btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+            background: var(--gold-accent);
+            color: #FFFFFF;
+            padding: 16px;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 2px;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+
+        .book-btn:hover {
+            background: #8E6D43;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="/" class="logo">MILTON <span>STUDIO</span></a>
+        <nav>
+            <a href="/">მთავარი</a>
+            <a href="/prices" class="active">ფასები & კალკულატორი</a>
+            <a href="/shop">მაღაზია</a>
+            <a href="/contact">კონტაქტი</a>
+        </nav>
     </header>
 
-    <div class="calculator-editorial-layout" style="display: flex; gap: 60px; align-items: flex-start; margin-top: 40px;">
-
-        <div class="calc-form-container" style="width: 55%; display: flex; flex-direction: column; gap: 25px; text-align: left;">
-
-            <div class="calc-field-group">
-                <label style="font-size: 11px; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; display: block; margin-bottom: 10px; color: #1a1a1a;">{{ t.pr_hair_cat }}</label>
-                <select id="hairType" onchange="calculateLuxePrice()" style="width: 100%; padding: 14px; border: 1px solid #ECE9E2; background-color: #FDFBF7; outline: none; font-family: inherit; font-size: 13.5px; color: #1a1a1a;">
-                    <option value="premium" data-price="28">{{ t.pr_hair_opt1 }}</option>
-                    <option value="luxe" data-price="35">{{ t.pr_hair_opt2 }}</option>
-                    <option value="exclusive" data-price="42">{{ t.pr_hair_opt3 }}</option>
-                </select>
-            </div>
-
-            <div class="calc-field-group">
-                <label style="font-size: 11px; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; display: block; margin-bottom: 10px; color: #1a1a1a;">{{ t.pr_length }}</label>
-                <select id="hairLength" onchange="calculateLuxePrice()" style="width: 100%; padding: 14px; border: 1px solid #ECE9E2; background-color: #FDFBF7; outline: none; font-family: inherit; font-size: 13.5px; color: #1a1a1a;">
-                    <option value="50" data-mult="1.0">50 {{ t.pr_cm }}</option>
-                    <option value="60" data-mult="1.2">60 {{ t.pr_cm }}</option>
-                    <option value="70" data-mult="1.4">70 {{ t.pr_cm }}</option>
-                    <option value="80" data-mult="1.6">80 {{ t.pr_cm }}</option>
-                </select>
-            </div>
-
-            <div class="calc-field-group">
-                <label style="font-size: 11px; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; display: block; margin-bottom: 10px; color: #1a1a1a;">{{ t.pr_master }}</label>
-                <select id="masterCat" onchange="calculateLuxePrice()" style="width: 100%; padding: 14px; border: 1px solid #ECE9E2; background-color: #FDFBF7; outline: none; font-family: inherit; font-size: 13.5px; color: #1a1a1a;">
-                    <option value="regular" data-work="1.5">Regular Master</option>
-                    <option value="top" data-work="2.0">Top Master</option>
-                    <option value="art" data-work="2.5">Art Director</option>
-                </select>
-            </div>
-
-            <div class="calc-field-group">
-                <label style="font-size: 11px; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; display: block; margin-bottom: 10px; color: #1a1a1a;">{{ t.pr_service }}</label>
-                <select id="salonService" onchange="calculateLuxePrice()" style="width: 100%; padding: 14px; border: 1px solid #ECE9E2; background-color: #FDFBF7; outline: none; font-family: inherit; font-size: 13.5px; color: #1a1a1a;">
-                    <option value="extensions">{{ t.pr_svc_opt1 }}</option>
-                    <option value="correction">{{ t.pr_svc_opt2 }}</option>
-                </select>
-            </div>
-
-            <div class="calc-field-group">
-                <label style="font-size: 11px; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; display: flex; justify-content: space-between; margin-bottom: 10px; color: #1a1a1a;">
-                    {{ t.pr_capsules }} <span id="capsuleVal" style="color: #A98456; font-weight: 600;">50 {{ t.pr_pcs }}</span>
-                </label>
-                <input type="range" id="hairCapsules" min="20" max="600" step="10" value="50" oninput="updateCapsuleLabel()" style="width: 100%; accent-color: #A98456; cursor: pointer;">
-            </div>
-
-            <div class="calc-field-group">
-                <label style="font-size: 11px; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; display: flex; justify-content: space-between; margin-bottom: 10px; color: #1a1a1a;">
-                    {{ t.pr_weight }} <span id="weightVal" style="color: #A98456; font-weight: 600;">100 {{ t.pr_grams }}</span>
-                </label>
-                <input type="range" id="hairWeight" min="20" max="300" step="10" value="100" oninput="updateWeightLabel()" style="width: 100%; accent-color: #A98456; cursor: pointer;">
-            </div>
-
+    <div class="calculator-container">
+        <div class="title-block">
+            <h1>HAIR EXTENSION CALCULATOR</h1>
+            <p>თმის დაგრძელების ინდივიდუალური ღირებულების გაანგარიშება</p>
         </div>
 
-        <div class="calc-summary-panel" style="width: 45%; background-color: #FDFBF7; border: 1px solid #ECE9E2; padding: 40px; text-align: left; box-shadow: 0 20px 40px rgba(0,0,0,0.02); position: sticky; top: 40px;">
-            <h2 style="font-family: var(--font-serif); font-size: 26px; font-weight: 400; margin-bottom: 30px; color: #1A1A1A;">{{ t.pr_summary }}</h2>
+        <div class="calc-grid">
+            <div class="calculator-inputs">
+                <!-- Hair Type -->
+                <div class="form-group">
+                    <label for="hairType">თმის ტიპი</label>
+                    <select id="hairType" class="select-input" onchange="calculatePrice()">
+                        <option value="georgian">ქართული ნატურალური თმა</option>
+                        <option value="slavic" selected>სლავური პრემიუმ თმა</option>
+                        <option value="baby">ბავშვის ექსკლუზიური თმა (Baby Hair)</option>
+                    </select>
+                </div>
 
-            <div class="summary-line" style="display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 14.5px; color: #444; font-weight: 300;">
-                <span>{{ t.pr_sum_hair }}</span>
-                <span id="sumHairBase" style="font-weight: 500; color: #1A1A1A;">0 ₾</span>
+                <!-- Length Slider -->
+                <div class="form-group">
+                    <label for="length">თმის სიგრძე: <span id="lengthVal" class="val-display">50 სმ</span></label>
+                    <input type="range" id="length" class="range-input" min="40" max="80" step="5" value="50" oninput="updateValues(); calculatePrice();">
+                </div>
+
+                <!-- Weight Slider -->
+                <div class="form-group">
+                    <label for="weight">თმის წონა: <span id="weightVal" class="val-display">100 გრამი</span></label>
+                    <input type="range" id="weight" class="range-input" min="50" max="250" step="10" value="100" oninput="updateValues(); calculatePrice();">
+                </div>
             </div>
 
-            <div class="summary-line" style="display: flex; justify-content: space-between; margin-bottom: 25px; font-size: 14.5px; color: #444; font-weight: 300;">
-                <span>{{ t.pr_sum_work }}</span>
-                <span id="sumWorkBase" style="font-weight: 500; color: #1A1A1A;">0 ₾</span>
-            </div>
+            <!-- Result Box -->
+            <div class="result-panel">
+                <div>
+                    <div class="result-title">MILTON ESTIMATE</div>
+                    <div class="price-breakdown">
+                        <div class="breakdown-row">
+                            <span>თმის მასალა:</span>
+                            <span id="hairCost">0 ₾</span>
+                        </div>
+                        <div class="breakdown-row">
+                            <span>იტალიური კაფსულაცია & დაგრძელება:</span>
+                            <span id="workCost">0 ₾</span>
+                        </div>
+                    </div>
+                </div>
 
-            <div class="summary-total-line" style="display: flex; justify-content: space-between; border-top: 1px solid #ECE9E2; padding-top: 25px; font-size: 20px; font-weight: 500; color: #1A1A1A;">
-                <span>{{ t.pr_sum_total }}</span>
-                <span id="sumTotal" style="color: #A98456; font-family: var(--font-serif); font-weight: 600;">0 ₾</span>
+                <div>
+                    <div class="total-row">
+                        <span>სულ ჯამში:</span>
+                        <div class="total-price" id="totalPrice">0 ₾</div>
+                    </div>
+                    <a href="/contact" class="book-btn" style="margin-top: 25px;">კონსულტაციის დაჯავშნა</a>
+                </div>
             </div>
         </div>
-
     </div>
-</div>
 
-<script>
-const UNIT_PCS = "{{ t.pr_pcs }}";
-const UNIT_GRAMS = "{{ t.pr_grams }}";
+    <script>
+        // Pricing structure per gram based on length and hair category (GEL)
+        const rates = {
+            georgian: { 40: 4.5, 45: 5.0, 50: 5.5, 55: 6.0, 60: 6.5, 65: 7.0, 70: 7.5, 75: 8.0, 80: 8.5 },
+            slavic:   { 40: 6.5, 45: 7.2, 50: 8.0, 55: 8.8, 60: 9.5, 65: 10.3, 70: 11.0, 75: 11.8, 80: 12.5 },
+            baby:     { 40: 9.5, 45: 10.5, 50: 11.5, 55: 12.5, 60: 13.5, 65: 14.5, 70: 15.5, 75: 16.5, 80: 17.5 }
+        };
 
-function updateCapsuleLabel() {
-    const caps = document.getElementById('hairCapsules').value;
-    document.getElementById('capsuleVal').textContent = caps + " " + UNIT_PCS;
-    calculateLuxePrice();
-}
+        const craftRatePerGram = 1.5; // Service & capsule installation cost per gram
 
-function updateWeightLabel() {
-    const weight = document.getElementById('hairWeight').value;
-    document.getElementById('weightVal').textContent = weight + " " + UNIT_GRAMS;
-    calculateLuxePrice();
-}
+        function updateValues() {
+            document.getElementById('lengthVal').innerText = document.getElementById('length').value + ' სმ';
+            document.getElementById('weightVal').innerText = document.getElementById('weight').value + ' გრამი';
+        }
 
-function calculateLuxePrice() {
-    const typeSelect = document.getElementById('hairType');
-    const basePricePer10g = parseFloat(typeSelect.options[typeSelect.selectedIndex].getAttribute('data-price'));
+        function calculatePrice() {
+            const type = document.getElementById('hairType').value;
+            const length = parseInt(document.getElementById('length').value);
+            const weight = parseInt(document.getElementById('weight').value);
 
-    const lengthSelect = document.getElementById('hairLength');
-    const lengthMultiplier = parseFloat(lengthSelect.options[lengthSelect.selectedIndex].getAttribute('data-mult'));
+            const hairRate = rates[type][length] || 8.0;
+            const totalHairCost = Math.round(hairRate * weight);
+            const totalWorkCost = Math.round(craftRatePerGram * weight);
+            const total = totalHairCost + totalWorkCost;
 
-    const masterSelect = document.getElementById('masterCat');
-    const masterWorkRate = parseFloat(masterSelect.options[masterSelect.selectedIndex].getAttribute('data-work'));
+            document.getElementById('hairCost').innerText = totalHairCost + ' ₾';
+            document.getElementById('workCost').innerText = totalWorkCost + ' ₾';
+            document.getElementById('totalPrice').innerText = total + ' ₾';
+        }
 
-    const serviceSelect = document.getElementById('salonService').value;
-
-    const weightGrams = parseInt(document.getElementById('hairWeight').value);
-    const capsuleCount = parseInt(document.getElementById('hairCapsules').value);
-
-    // 1. თმის ფასი გრამების და სიგრძის მიხედვით
-    const hairCost = (weightGrams / 10) * basePricePer10g * lengthMultiplier;
-
-    // 2. სამუშაოს ფასი კაფსულების მიხედვით
-    let serviceMultiplier = 1.0;
-    if (serviceSelect === "correction") {
-        serviceMultiplier = 1.8; // კორექციის კოეფიციენტი
-    }
-    const workCost = capsuleCount * masterWorkRate * serviceMultiplier;
-
-    const totalCost = hairCost + workCost;
-
-    document.getElementById('sumHairBase').textContent = Math.round(hairCost) + " ₾";
-    document.getElementById('sumWorkBase').textContent = Math.round(workCost) + " ₾";
-    document.getElementById('sumTotal').textContent = Math.round(totalCost) + " ₾";
-}
-
-document.addEventListener("DOMContentLoaded", calculateLuxePrice);
-</script>
-{% endblock %}
+        // Initialize calculation on page load
+        calculatePrice();
+    </script>
+</body>
+</html>
