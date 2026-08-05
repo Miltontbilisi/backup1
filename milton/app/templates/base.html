@@ -105,6 +105,166 @@
                 display: none;
             }
         }
+
+        /* Cart drawer */
+        #miltonCartToggle {
+            position: relative;
+        }
+
+        #miltonCartCount {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: -8px;
+            right: -10px;
+            min-width: 16px;
+            height: 16px;
+            padding: 0 4px;
+            border-radius: 8px;
+            background: var(--gold-accent);
+            color: #FFFFFF;
+            font-size: 10px;
+            line-height: 1;
+        }
+
+        #miltonCartOverlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1998;
+        }
+
+        #miltonCartDrawer {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 380px;
+            max-width: 90vw;
+            height: 100%;
+            background: var(--nav-bg);
+            border-left: 1px solid rgba(169, 132, 86, 0.25);
+            z-index: 1999;
+            transform: translateX(100%);
+            transition: transform 0.35s ease;
+            display: flex;
+            flex-direction: column;
+            padding: 30px;
+        }
+
+        body.milton-cart-open #miltonCartOverlay {
+            display: block;
+        }
+
+        body.milton-cart-open #miltonCartDrawer {
+            transform: translateX(0);
+        }
+
+        .milton-cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .milton-cart-header h3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+            letter-spacing: 1px;
+            color: var(--gold-accent);
+        }
+
+        #miltonCartClose {
+            background: none;
+            border: none;
+            color: #FFFFFF;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        #miltonCartItems {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        #miltonCartEmpty {
+            color: #999999;
+            font-size: 13px;
+        }
+
+        .milton-cart-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            font-size: 13px;
+        }
+
+        .milton-cart-row-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .milton-cart-row-meta {
+            color: #999999;
+            font-size: 12px;
+        }
+
+        .milton-cart-remove {
+            background: none;
+            border: none;
+            color: #999999;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .milton-cart-remove:hover {
+            color: var(--gold-accent);
+        }
+
+        .milton-cart-footer {
+            border-top: 1px solid rgba(169, 132, 86, 0.25);
+            padding-top: 20px;
+            margin-top: 20px;
+        }
+
+        .milton-cart-total-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 15px;
+            margin-bottom: 18px;
+        }
+
+        .milton-cart-total-row strong {
+            color: var(--gold-accent);
+        }
+
+        .milton-cart-btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+            padding: 14px;
+            text-decoration: none;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .milton-cart-btn-primary {
+            background: var(--gold-accent);
+            color: #FFFFFF;
+        }
+
+        .milton-cart-btn-secondary {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #FFFFFF;
+            cursor: pointer;
+        }
     </style>
     {% block extra_css %}{% endblock %}
 </head>
@@ -129,7 +289,7 @@
         <div class="nav-right">
             <a href="{{ url_for('main.set_lang', lang_code=other_lang) }}" style="color:inherit; text-decoration:none;">{{ other_lang|upper }}</a>
             <span>☀️</span>
-            <span>🛍️</span>
+            <span id="miltonCartToggle">🛍️<span id="miltonCartCount">0</span></span>
         </div>
     </header>
 
@@ -141,6 +301,26 @@
         <p>© MILTON STUDIO. {{ 'ყველა უფლება დაცულია.' if lang == 'ka' else 'All rights reserved.' }}</p>
     </footer>
 
+    <div id="miltonCartOverlay"></div>
+    <div id="miltonCartDrawer">
+        <div class="milton-cart-header">
+            <h3>{{ t.cart_title }}</h3>
+            <button type="button" id="miltonCartClose">✕</button>
+        </div>
+        <div id="miltonCartItems">
+            <p id="miltonCartEmpty">{{ t.cart_empty }}</p>
+        </div>
+        <div class="milton-cart-footer">
+            <div class="milton-cart-total-row">
+                <span>{{ t.cart_total }}</span>
+                <strong id="miltonCartTotalValue">0.00 ₾</strong>
+            </div>
+            <a href="/contact?checkout=1" class="milton-cart-btn milton-cart-btn-primary">{{ t.cart_checkout }}</a>
+            <button type="button" id="miltonCartContinue" class="milton-cart-btn milton-cart-btn-secondary">{{ t.cart_continue }}</button>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/cart.js') }}"></script>
     {% block extra_js %}{% endblock %}
 </body>
 </html>

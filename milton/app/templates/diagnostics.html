@@ -170,7 +170,7 @@
 
         <div class="diagnostics-grid">
             <div class="quiz-card">
-                <form method="POST" action="/diagnostics">
+                <form method="POST" action="{{ url_for('main.diagnostic') }}">
                     <div class="quiz-group">
                         <label for="hair_type">აირჩიეთ თქვენი თმის მიმდინარე კლინიკური მდგომარეობა:</label>
                         <select name="hair_type" id="hair_type" class="quiz-options">
@@ -194,10 +194,10 @@
 
                         {% if product.is_video %}
                             <video autoplay loop muted playsinline>
-                                <source src="{{ url_for('static', filename='video/' + product.image) }}" type="video/mp4">
+                                <source src="{{ url_for('static', filename='images/' + product.image) }}" type="video/mp4">
                             </video>
                         {% else %}
-                            <img src="{{ url_for('static', filename='img/products/' + product.image) }}" alt="{{ product.name }}">
+                            <img src="{{ url_for('static', filename='images/' + product.image) }}" alt="{{ product.name }}">
                         {% endif %}
 
                         <p style="font-size: 14px; line-height: 1.7; color: #444444; text-align: left; margin: 25px 0;">

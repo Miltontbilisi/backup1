@@ -155,27 +155,76 @@
         </div>
 
         <div class="contact-form-side">
-            <form class="luxury-contact-form" onsubmit="event.preventDefault(); alert('{{ t.ct_sent }}');">
+            <form class="luxury-contact-form" id="miltonContactForm">
                 <div class="form-line-group">
                     <label for="clientName">{{ t.ct_name }}</label>
-                    <input type="text" id="clientName" placeholder="{{ t.ct_name_ph }}" required>
+                    <input type="text" id="clientName" name="name" placeholder="{{ t.ct_name_ph }}" required>
                 </div>
 
                 <div class="form-line-group">
                     <label for="clientPhone">{{ t.ct_phone_l }}</label>
-                    <input type="tel" id="clientPhone" placeholder="{{ t.ct_phone_ph }}" required>
+                    <input type="tel" id="clientPhone" name="phone" placeholder="{{ t.ct_phone_ph }}" required>
                 </div>
 
                 <div class="form-line-group">
                     <label for="clientMessage">{{ t.ct_msg }}</label>
-                    <textarea id="clientMessage" rows="3" placeholder="{{ t.ct_msg_ph }}"></textarea>
+                    <textarea id="clientMessage" name="message" rows="3" placeholder="{{ t.ct_msg_ph }}"></textarea>
                 </div>
 
-                <button type="submit" class="btn-luxury-submit">{{ t.ct_send }}</button>
+                <button type="submit" class="btn-luxury-submit" id="miltonContactSubmitBtn">{{ t.ct_send }}</button>
             </form>
         </div>
 
     </div>
+
+    <script>
+        const miltonIsCheckout = new URLSearchParams(window.location.search).get('checkout') === '1';
+
+        document.addEventListener('DOMContentLoaded', function () {
+            if (miltonIsCheckout && window.miltonGetCartSummary) {
+                const summary = window.miltonGetCartSummary();
+                const msgField = document.getElementById('clientMessage');
+                if (msgField && summary.count > 0) {
+                    msgField.value =
+                        "{{ 'ვსურვ შემდეგი პროდუქტების შეკვეთა:' if lang == 'ka' else 'I would like to order the following products:' }}\n" +
+                        summary.text +
+                        "\n{{ 'ჯამი' if lang == 'ka' else 'Total' }}: " + summary.total.toFixed(2) + " ₾";
+                }
+            }
+        });
+
+        document.getElementById('miltonContactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const form = e.target;
+            const btn = document.getElementById('miltonContactSubmitBtn');
+            const originalLabel = btn.textContent;
+            btn.disabled = true;
+
+            fetch("{{ url_for('main.contact_submit') }}", {
+                method: 'POST',
+                body: new FormData(form)
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.ok) {
+                    alert("{{ t.ct_sent }}");
+                    form.reset();
+                    if (miltonIsCheckout && window.miltonClearCart) {
+                        window.miltonClearCart();
+                    }
+                } else {
+                    alert("{{ t.kit_err }}");
+                }
+            })
+            .catch(() => {
+                alert("{{ t.kit_err }}");
+            })
+            .finally(() => {
+                btn.disabled = false;
+                btn.textContent = originalLabel;
+            });
+        });
+    </script>
 
     <!-- Landscape რუკა მთელ სიგანეზე -->
     <div class="contact-map-landscape">

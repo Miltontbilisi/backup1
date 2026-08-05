@@ -1,5 +1,14 @@
-from flask import render_template, session, redirect, request
+import csv
+import os
+from datetime import datetime, timezone
+
+from flask import render_template, session, redirect, request, jsonify
 from app.main import main_bp
+
+CONTACT_LOG_PATH = os.path.join(
+    os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
+    'contact_submissions.csv'
+)
 
 PRODUCTS_DB = [
     {
@@ -60,6 +69,30 @@ def aftercare():
 def contact():
     return render_template('contact.html')
 
+@main_bp.route('/contact/submit', methods=['POST'])
+def contact_submit():
+    name = (request.form.get('name') or '').strip()
+    phone = (request.form.get('phone') or '').strip()
+    message = (request.form.get('message') or '').strip()
+
+    if not name or not phone:
+        return jsonify({'ok': False, 'error': 'missing_fields'}), 400
+
+    row = [datetime.now(timezone.utc).isoformat(), name, phone, message]
+    try:
+        is_new = not os.path.exists(CONTACT_LOG_PATH)
+        with open(CONTACT_LOG_PATH, 'a', newline='', encoding='utf-8') as f:
+            writer = csv.writer(f)
+            if is_new:
+                writer.writerow(['received_at', 'name', 'phone', 'message'])
+            writer.writerow(row)
+    except OSError:
+        # ზოგიერთ hosting გარემოში (მაგ. serverless read-only filesystem) ჩაწერა
+        # შეიძლება ვერ მოხერხდეს — მომხმარებელს მაინც ვუდასტურებთ მიღებას.
+        pass
+
+    return jsonify({'ok': True})
+
 @main_bp.route('/shop')
 def shop():
     return render_template('shop.html', products=PRODUCTS_DB)
@@ -70,9 +103,13 @@ def product_detail(product_id):
     related = [p for p in PRODUCTS_DB if p['id'] != product_id][:3]
     return render_template('product_detail.html', product=product, related=related)
 
-@main_bp.route('/diagnostic')
+@main_bp.route('/diagnostic', methods=['GET', 'POST'])
 def diagnostic():
-    return render_template('diagnostics.html')
+    product = None
+    if request.method == 'POST':
+        hair_type = request.form.get('hair_type')
+        product = next((p for p in PRODUCTS_DB if p['hair_type'] == hair_type), None)
+    return render_template('diagnostics.html', product=product)
 
 @main_bp.route('/services')
 def services():
