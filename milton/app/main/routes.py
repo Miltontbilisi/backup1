@@ -1,4 +1,4 @@
-from flask import render_template
+from flask import render_template, session, redirect, request
 from app.main import main_bp
 
 PRODUCTS_DB = [
@@ -73,3 +73,33 @@ def product_detail(product_id):
 @main_bp.route('/diagnostic')
 def diagnostic():
     return render_template('diagnostics.html')
+
+@main_bp.route('/services')
+def services():
+    return render_template('services.html')
+
+@main_bp.route('/extensions')
+def extensions():
+    return render_template('extensions.html')
+
+@main_bp.route('/compare')
+def compare():
+    return render_template('compare.html')
+
+@main_bp.route('/color-match')
+def color_match():
+    return render_template('color_match.html')
+
+@main_bp.route('/academy')
+def academy():
+    return render_template('academy.html')
+
+@main_bp.route('/academy/keratin')
+def academy_keratin():
+    return render_template('academy_keratin.html')
+
+@main_bp.route('/lang/<lang_code>')
+def set_lang(lang_code):
+    if lang_code in ('ka', 'en'):
+        session['lang'] = lang_code
+    return redirect(request.referrer or '/')
