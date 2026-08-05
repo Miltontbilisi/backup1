@@ -3,18 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}MILTON STUDIO | Luxury Hair Salon{% endblock %}</title>
+    <title>{% block title %}MILTON STUDIO | პრემიუმ თმის დაგრძელება{% endblock %}</title>
 
-    <!-- Fonts & Libraries -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/@swup/unpkg@4"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
     <style>
         :root {
             --gold-accent: #A98456;
-            --dark-slate: #1A1A1A;
+            --dark-bg: #141414;
+            --nav-bg: #181818;
+            --text-color: #FFFFFF;
             --global-padding: 8%;
         }
 
@@ -25,126 +23,88 @@
         }
 
         body {
-            background-color: var(--dark-slate);
-            color: #FFFFFF;
+            background-color: var(--dark-bg);
+            color: var(--text-color);
             font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
             overflow-x: hidden;
-            padding-top: 90px;
         }
 
-        /* Architectural Floating Navbar */
-        .milton-navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
+        header {
             width: 100%;
-            z-index: 1000;
-            padding: 28px var(--global-padding);
+            background-color: var(--nav-bg);
+            padding: 22px var(--global-padding);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: transparent;
-            backdrop-filter: blur(0px);
-            -webkit-backdrop-filter: blur(0px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            transition: background-color 0.4s ease, padding 0.4s ease, border-color 0.4s ease, backdrop-filter 0.4s ease;
-        }
-
-        /* Scrolled Glassmorphic State */
-        .milton-navbar.scrolled {
-            padding: 18px var(--global-padding);
-            background-color: rgba(26, 26, 26, 0.85);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-bottom: 1px solid rgba(169, 132, 86, 0.25);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
         .logo {
             font-family: 'Playfair Display', serif;
-            font-size: 22px;
-            letter-spacing: 4px;
+            font-size: 24px;
+            letter-spacing: 5px;
             color: #FFFFFF;
             text-decoration: none;
+            font-weight: 600;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+        }
+
+        nav a {
+            color: #D1D1D1;
+            text-decoration: none;
+            font-size: 13px;
+            letter-spacing: 1px;
             transition: color 0.3s ease;
         }
 
-        .logo span {
+        nav a:hover, nav a.active {
             color: var(--gold-accent);
+            border-bottom: 1px solid var(--gold-accent);
+            padding-bottom: 4px;
         }
 
-        .nav-links {
+        .nav-right {
             display: flex;
-            gap: 32px;
             align-items: center;
-        }
-
-        .nav-links a {
-            color: #E0E0E0;
-            text-decoration: none;
+            gap: 18px;
             font-size: 12px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            font-weight: 400;
-            position: relative;
+            color: #D1D1D1;
+            letter-spacing: 1px;
+        }
+
+        .nav-right span {
+            cursor: pointer;
             transition: color 0.3s ease;
         }
 
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -6px;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background-color: var(--gold-accent);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover {
+        .nav-right span:hover {
             color: var(--gold-accent);
         }
 
-        .nav-links a:hover::after {
-            width: 100%;
+        main {
+            min-height: 80vh;
         }
 
-        .nav-actions {
-            display: flex;
-            align-items: center;
-            gap: 20px;
+        footer {
+            background-color: #0F0F0F;
+            padding: 40px var(--global-padding);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            text-align: center;
+            font-size: 12px;
+            color: #888888;
         }
 
-        .cta-reserve {
-            border: 1px solid var(--gold-accent);
-            color: var(--gold-accent);
-            padding: 10px 22px;
-            text-decoration: none;
-            font-size: 11px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
-        }
-
-        .cta-reserve:hover {
-            background-color: var(--gold-accent);
-            color: #FFFFFF;
-        }
-
-        /* Swup Animations */
-        .transition-fade {
-            opacity: 1;
-            transform: translateY(0);
-            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-        }
-
-        html.is-animating .transition-fade {
-            opacity: 0;
-            transform: translateY(15px);
-        }
-
-        @media (max-width: 900px) {
-            .nav-links {
+        @media (max-width: 1024px) {
+            nav {
                 display: none;
             }
         }
@@ -153,69 +113,34 @@
 </head>
 <body>
 
-    <!-- Dynamic Header -->
-    <header class="milton-navbar" id="miltonNavbar">
-        <a href="/" class="logo">MILTON <span>STUDIO</span></a>
+    <header>
+        <a href="/" class="logo">MILTON</a>
 
-        <nav class="nav-links">
-            <a href="/">მთავარი</a>
-            <a href="/prices">ფასები & კალკულატორი</a>
+        <nav>
+            <a href="/" class="active">მთავარი</a>
+            <a href="/shop">თმის კოლექციები ▾</a>
+            <a href="/prices">ფასები & მასტერები</a>
             <a href="/shop">მაღაზია</a>
-            <a href="/diagnostic">თმის დიაგნოსტიკა</a>
-            <a href="/aftercare">მოვლის წესები</a>
+            <a href="#">MILTON აკადემია ▾</a>
+            <a href="/aftercare">STATUS CLUB & მოვლა ▾</a>
             <a href="/contact">კონტაქტი</a>
         </nav>
 
-        <div class="nav-actions">
-            <a href="/contact" class="cta-reserve">ვიზიტი</a>
+        <div class="nav-right">
+            <span>EN</span>
+            <span>☀️</span>
+            <span>🛍️</span>
         </div>
     </header>
 
-    <!-- Main Container for Page Swup Transitions -->
-    <main id="swup" class="transition-fade">
+    <main>
         {% block content %}{% endblock %}
     </main>
 
-    <script>
-        gsap.registerPlugin(ScrollTrigger);
+    <footer>
+        <p>© MILTON STUDIO. ყველა უფლება დაცულია.</p>
+    </footer>
 
-        // Header Scroll Interaction Logic
-        function initHeaderScroll() {
-            const navbar = document.getElementById('miltonNavbar');
-            if (!navbar) return;
-
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 40) {
-                    navbar.classList.add('scrolled');
-                } else {
-                    navbar.classList.remove('scrolled');
-                }
-            });
-        }
-
-        // GSAP Entrance Animations
-        function initAnimations() {
-            gsap.from("#miltonNavbar", {
-                duration: 1.2,
-                y: -30,
-                opacity: 0,
-                ease: "power3.out"
-            });
-        }
-
-        // Page Transitions Initializer
-        const swup = new Swup();
-        swup.hooks.on('page:view', () => {
-            window.scrollTo(0, 0);
-            initHeaderScroll();
-            initAnimations();
-        });
-
-        document.addEventListener("DOMContentLoaded", () => {
-            initHeaderScroll();
-            initAnimations();
-        });
-    </script>
     {% block extra_js %}{% endblock %}
 </body>
 </html>
