@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MILTON STUDIO | ღირებულების კალკულატორი</title>
+    <title>MILTON STUDIO | ფასები & კალკულატორი</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -61,19 +61,19 @@
         }
 
         .calculator-container {
-            max-width: 1000px;
-            margin: 60px auto;
+            max-width: 1100px;
+            margin: 50px auto;
             padding: 0 var(--global-padding);
         }
 
         .title-block {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 40px;
         }
 
         .title-block h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 38px;
+            font-size: 36px;
             font-weight: 400;
             letter-spacing: 2px;
             margin-bottom: 10px;
@@ -96,38 +96,38 @@
             border-radius: 4px;
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 850px) {
             .calc-grid {
                 grid-template-columns: 1fr;
             }
         }
 
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         .form-group label {
             display: block;
-            font-size: 13px;
+            font-size: 12px;
             letter-spacing: 1px;
             color: var(--gold-accent);
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             text-transform: uppercase;
         }
 
-        .select-input, .range-input {
+        .select-input, .number-input {
             width: 100%;
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.2);
             color: #FFFFFF;
-            padding: 14px;
+            padding: 12px;
             font-family: 'Montserrat', sans-serif;
             font-size: 14px;
             outline: none;
             transition: border-color 0.3s ease;
         }
 
-        .select-input:focus {
+        .select-input:focus, .number-input:focus {
             border-color: var(--gold-accent);
         }
 
@@ -136,13 +136,6 @@
             color: #FFFFFF;
         }
 
-        .val-display {
-            float: right;
-            color: #FFFFFF;
-            font-weight: 600;
-        }
-
-        /* Result Panel */
         .result-panel {
             background: rgba(169, 132, 86, 0.08);
             border: 1px solid var(--gold-accent);
@@ -158,10 +151,6 @@
             color: var(--gold-accent);
             margin-bottom: 20px;
             letter-spacing: 1px;
-        }
-
-        .price-breakdown {
-            margin-bottom: 25px;
         }
 
         .breakdown-row {
@@ -185,7 +174,7 @@
 
         .total-price {
             font-family: 'Playfair Display', serif;
-            font-size: 36px;
+            font-size: 34px;
             color: var(--gold-accent);
             font-weight: 600;
         }
@@ -203,10 +192,48 @@
             letter-spacing: 2px;
             font-weight: 600;
             transition: background 0.3s ease;
+            margin-top: 25px;
         }
 
         .book-btn:hover {
             background: #8E6D43;
+        }
+
+        /* Official Price List Display */
+        .price-tables-section {
+            margin-top: 60px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .price-tables-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .price-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 30px;
+        }
+
+        .price-card h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--gold-accent);
+            font-size: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+
+        .price-list-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 13px;
         }
     </style>
 </head>
@@ -224,47 +251,67 @@
 
     <div class="calculator-container">
         <div class="title-block">
-            <h1>HAIR EXTENSION CALCULATOR</h1>
+            <h1>PRICES & CALCULATOR</h1>
             <p>თმის დაგრძელების ინდივიდუალური ღირებულების გაანგარიშება</p>
         </div>
 
         <div class="calc-grid">
             <div class="calculator-inputs">
-                <!-- Hair Type -->
                 <div class="form-group">
-                    <label for="hairType">თმის ტიპი</label>
-                    <select id="hairType" class="select-input" onchange="calculatePrice()">
-                        <option value="georgian">ქართული ნატურალური თმა</option>
-                        <option value="slavic" selected>სლავური პრემიუმ თმა</option>
-                        <option value="baby">ბავშვის ექსკლუზიური თმა (Baby Hair)</option>
+                    <label for="hairType">თმის კატეგორია</label>
+                    <select id="hairType" class="select-input" onchange="updateLengths(); calculate();">
+                        <option value="slavic" selected>SLAVIC</option>
+                        <option value="georgian">GEORGIAN</option>
+                        <option value="baby">BABY / EXCLUSIVE</option>
                     </select>
                 </div>
 
-                <!-- Length Slider -->
                 <div class="form-group">
-                    <label for="length">თმის სიგრძე: <span id="lengthVal" class="val-display">50 სმ</span></label>
-                    <input type="range" id="length" class="range-input" min="40" max="80" step="5" value="50" oninput="updateValues(); calculatePrice();">
+                    <label for="hairLength">თმის სიგრძე</label>
+                    <select id="hairLength" class="select-input" onchange="calculate();">
+                        <!-- Populated by JS -->
+                    </select>
                 </div>
 
-                <!-- Weight Slider -->
                 <div class="form-group">
-                    <label for="weight">თმის წონა: <span id="weightVal" class="val-display">100 გრამი</span></label>
-                    <input type="range" id="weight" class="range-input" min="50" max="250" step="10" value="100" oninput="updateValues(); calculatePrice();">
+                    <label for="hairWeight">თმის წონა (გრამი)</label>
+                    <input type="number" id="hairWeight" class="number-input" value="100" min="50" max="300" step="10" oninput="calculate();">
+                </div>
+
+                <div class="form-group">
+                    <label for="masterType">ოსტატის კატეგორია</label>
+                    <select id="masterType" class="select-input" onchange="calculate();">
+                        <option value="regular">REGULAR MASTER</option>
+                        <option value="top">TOP MASTER</option>
+                        <option value="turbo">TURBO MASTER</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="serviceType">სერვისის ტიპი</label>
+                    <select id="serviceType" class="select-input" onchange="calculate();">
+                        <option value="extension">EXTENSION / დაგრძელება</option>
+                        <option value="correction">CORRECTION / კორექცია</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="capsuleCount">კაფსულების რაოდენობა</label>
+                    <input type="number" id="capsuleCount" class="number-input" value="100" min="50" max="400" step="10" oninput="calculate();">
                 </div>
             </div>
 
-            <!-- Result Box -->
             <div class="result-panel">
                 <div>
                     <div class="result-title">MILTON ESTIMATE</div>
                     <div class="price-breakdown">
                         <div class="breakdown-row">
                             <span>თმის მასალა:</span>
-                            <span id="hairCost">0 ₾</span>
+                            <span id="hairCostDisplay">0 GEL</span>
                         </div>
                         <div class="breakdown-row">
-                            <span>იტალიური კაფსულაცია & დაგრძელება:</span>
-                            <span id="workCost">0 ₾</span>
+                            <span>კაფსულაცია & სერვისი:</span>
+                            <span id="serviceCostDisplay">0 GEL</span>
                         </div>
                     </div>
                 </div>
@@ -272,46 +319,92 @@
                 <div>
                     <div class="total-row">
                         <span>სულ ჯამში:</span>
-                        <div class="total-price" id="totalPrice">0 ₾</div>
+                        <div class="total-price" id="totalPriceDisplay">0 GEL</div>
                     </div>
-                    <a href="/contact" class="book-btn" style="margin-top: 25px;">კონსულტაციის დაჯავშნა</a>
+                    <a href="/contact" class="book-btn">ვიზიტის დაჯავშნა</a>
                 </div>
+            </div>
+        </div>
+
+        <!-- Official Price List Tables -->
+        <div class="price-tables-section">
+            <div class="price-card">
+                <h3>HAIR MATERIAL (100 GR)</h3>
+                <div class="price-list-item"><span>SLAVIC 50 CM</span><span>1100 GEL</span></div>
+                <div class="price-list-item"><span>SLAVIC 60 CM</span><span>1250 GEL</span></div>
+                <div class="price-list-item"><span>SLAVIC 70 CM</span><span>1400 GEL</span></div>
+                <div class="price-list-item"><span>GEORGIAN 40 CM</span><span>900 GEL</span></div>
+                <div class="price-list-item"><span>GEORGIAN 50 CM</span><span>1100 GEL</span></div>
+                <div class="price-list-item"><span>GEORGIAN 60 CM</span><span>1200 GEL</span></div>
+                <div class="price-list-item"><span>GEORGIAN 70 CM</span><span>1400 GEL</span></div>
+                <div class="price-list-item"><span>BABY / EXCLUSIVE 40 CM</span><span>1100 GEL</span></div>
+                <div class="price-list-item"><span>BABY / EXCLUSIVE 50 CM</span><span>1250 GEL</span></div>
+                <div class="price-list-item"><span>BABY / EXCLUSIVE 60 CM</span><span>1550 GEL</span></div>
+            </div>
+
+            <div class="price-card">
+                <h3>SERVICE (1 CAPSULE)</h3>
+                <div class="price-list-item"><span>REGULAR MASTER (EXTENSION)</span><span>1.5 GEL</span></div>
+                <div class="price-list-item"><span>REGULAR MASTER (CORRECTION)</span><span>1.8 GEL</span></div>
+                <div class="price-list-item"><span>TOP MASTER (EXTENSION)</span><span>2.0 GEL</span></div>
+                <div class="price-list-item"><span>TOP MASTER (CORRECTION)</span><span>2.3 GEL</span></div>
+                <div class="price-list-item"><span>TURBO MASTER (EXTENSION)</span><span>2.0 GEL</span></div>
+                <div class="price-list-item"><span>TURBO MASTER (CORRECTION)</span><span>2.3 GEL</span></div>
             </div>
         </div>
     </div>
 
     <script>
-        // Pricing structure per gram based on length and hair category (GEL)
-        const rates = {
-            georgian: { 40: 4.5, 45: 5.0, 50: 5.5, 55: 6.0, 60: 6.5, 65: 7.0, 70: 7.5, 75: 8.0, 80: 8.5 },
-            slavic:   { 40: 6.5, 45: 7.2, 50: 8.0, 55: 8.8, 60: 9.5, 65: 10.3, 70: 11.0, 75: 11.8, 80: 12.5 },
-            baby:     { 40: 9.5, 45: 10.5, 50: 11.5, 55: 12.5, 60: 13.5, 65: 14.5, 70: 15.5, 75: 16.5, 80: 17.5 }
+        const hairDatabase = {
+            slavic: { 50: 1100, 60: 1250, 70: 1400 },
+            georgian: { 40: 900, 50: 1100, 60: 1200, 70: 1400 },
+            baby: { 40: 1100, 50: 1250, 60: 1550 }
         };
 
-        const craftRatePerGram = 1.5; // Service & capsule installation cost per gram
+        const serviceRates = {
+            regular: { extension: 1.5, correction: 1.8 },
+            top: { extension: 2.0, correction: 2.3 },
+            turbo: { extension: 2.0, correction: 2.3 }
+        };
 
-        function updateValues() {
-            document.getElementById('lengthVal').innerText = document.getElementById('length').value + ' სმ';
-            document.getElementById('weightVal').innerText = document.getElementById('weight').value + ' გრამი';
-        }
-
-        function calculatePrice() {
+        function updateLengths() {
             const type = document.getElementById('hairType').value;
-            const length = parseInt(document.getElementById('length').value);
-            const weight = parseInt(document.getElementById('weight').value);
+            const lengthSelect = document.getElementById('hairLength');
+            lengthSelect.innerHTML = '';
 
-            const hairRate = rates[type][length] || 8.0;
-            const totalHairCost = Math.round(hairRate * weight);
-            const totalWorkCost = Math.round(craftRatePerGram * weight);
-            const total = totalHairCost + totalWorkCost;
-
-            document.getElementById('hairCost').innerText = totalHairCost + ' ₾';
-            document.getElementById('workCost').innerText = totalWorkCost + ' ₾';
-            document.getElementById('totalPrice').innerText = total + ' ₾';
+            const availableLengths = Object.keys(hairDatabase[type]);
+            availableLengths.forEach(len => {
+                const opt = document.createElement('option');
+                opt.value = len;
+                opt.innerText = len + ' CM';
+                lengthSelect.appendChild(opt);
+            });
         }
 
-        // Initialize calculation on page load
-        calculatePrice();
+        function calculate() {
+            const type = document.getElementById('hairType').value;
+            const length = document.getElementById('hairLength').value;
+            const weight = parseFloat(document.getElementById('hairWeight').value) || 0;
+
+            const master = document.getElementById('masterType').value;
+            const service = document.getElementById('serviceType').value;
+            const capsules = parseFloat(document.getElementById('capsuleCount').value) || 0;
+
+            const pricePer100g = hairDatabase[type][length] || 0;
+            const hairCost = (pricePer100g / 100) * weight;
+
+            const ratePerCapsule = serviceRates[master][service];
+            const serviceCost = ratePerCapsule * capsules;
+
+            const total = hairCost + serviceCost;
+
+            document.getElementById('hairCostDisplay').innerText = Math.round(hairCost) + ' GEL';
+            document.getElementById('serviceCostDisplay').innerText = Math.round(serviceCost) + ' GEL';
+            document.getElementById('totalPriceDisplay').innerText = Math.round(total) + ' GEL';
+        }
+
+        updateLengths();
+        calculate();
     </script>
 </body>
 </html>
