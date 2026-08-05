@@ -5,7 +5,7 @@ PRODUCTS_DB = [
     {
         'id': 1, 'brand': "L'ORÉAL PROFESSIONNEL", 'name': "Absolut Repair Molecular",
         'sub': "ინოვაციური მოლეკულური შამპუნი", 'price': "115.00",
-        'image': "shampoo-3d.mp4.mp4", 'is_video': True, 'collection': "absolut",
+        'image': "absolut-repair.mp4.mp4", 'is_video': True, 'collection': "absolut",
         'type': "shampoo", 'hair_type': "damaged", 'benefit': "repair",
         'desc': "პატენტური მოლეკულური ფორმულა, რომელიც აღადგენს თმის დაზიანებულ სტრუქტურას შიგნიდან.",
         'usage': "დაიტანეთ სველ თმაზე, ნაზად დაიმასაჟეთ კაფსულების ზონაში და კარგად ჩამოიბანეთ."
