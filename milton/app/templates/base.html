@@ -95,6 +95,31 @@
             color: var(--gold-accent);
         }
 
+        .lang-switch {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .lang-switch a {
+            color: #888888;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .lang-switch a.active {
+            color: var(--gold-accent);
+            font-weight: 600;
+        }
+
+        .lang-switch a:hover {
+            color: #FFFFFF;
+        }
+
+        .lang-sep {
+            color: #444444;
+        }
+
         main {
             min-height: 80vh;
         }
@@ -363,7 +388,11 @@
         </nav>
 
         <div class="nav-right">
-            <a href="{{ url_for('main.set_lang', lang_code=other_lang) }}" style="color:inherit; text-decoration:none;">{{ other_lang|upper }}</a>
+            <div class="lang-switch">
+                {% for code in supported_langs %}
+                <a href="{{ url_for('main.set_lang', lang_code=code) }}" class="{{ 'active' if code == lang else '' }}">{{ code|upper }}</a>{% if not loop.last %}<span class="lang-sep">/</span>{% endif %}
+                {% endfor %}
+            </div>
             <span id="miltonCartToggle">🛍️<span id="miltonCartCount">0</span></span>
         </div>
     </header>

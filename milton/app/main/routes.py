@@ -183,6 +183,6 @@ def gallery():
 
 @main_bp.route('/lang/<lang_code>')
 def set_lang(lang_code):
-    if lang_code in ('ka', 'en'):
+    if lang_code in ('ka', 'en', 'ru'):
         session['lang'] = lang_code
     return redirect(request.referrer or '/')

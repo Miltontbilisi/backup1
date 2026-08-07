@@ -11,13 +11,17 @@ def create_app():
     from .main import main_bp
     app.register_blueprint(main_bp)
 
+    SUPPORTED_LANGS = ('ka', 'en', 'ru')
+
     @app.context_processor
     def inject_i18n():
         lang = session.get('lang', 'ka')
+        if lang not in SUPPORTED_LANGS:
+            lang = 'ka'
         return {
             't': TRANSLATIONS[lang],
             'lang': lang,
-            'other_lang': 'en' if lang == 'ka' else 'ka',
+            'supported_langs': SUPPORTED_LANGS,
         }
 
     return app
