@@ -12,6 +12,14 @@
             --nav-bg: #181818;
             --text-color: #FFFFFF;
             --global-padding: 8%;
+            /* გვერდების ნაწილი (index, shop, academy, compare, color-match) იყენებს ამ
+               ცვლადებს ღია-ფონიან სექციებში — აქ განსაზღვრა, რომ ტექსტი აღარ იყოს
+               უხილავი (თეთრი ფონზე უჩინარი თეთრი ტექსტი). */
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Montserrat', sans-serif;
+            --luxury-dark: #1A1A1A;
+            --premium-bg: #FDFBF7;
+            --border-tone: #ECE9E2;
         }
 
         * {
@@ -93,11 +101,78 @@
 
         footer {
             background-color: #0F0F0F;
-            padding: 40px var(--global-padding);
+            padding: 60px var(--global-padding) 30px;
             border-top: 1px solid rgba(255, 255, 255, 0.08);
             text-align: center;
             font-size: 12px;
             color: #888888;
+        }
+
+        .milton-newsletter {
+            max-width: 480px;
+            margin: 0 auto 40px;
+        }
+
+        .milton-newsletter h3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+            font-size: 20px;
+            color: var(--gold-accent);
+            margin-bottom: 12px;
+        }
+
+        .milton-newsletter p {
+            font-size: 13px;
+            line-height: 1.7;
+            color: #999999;
+            margin-bottom: 20px;
+        }
+
+        .milton-newsletter form {
+            display: flex;
+            gap: 10px;
+        }
+
+        .milton-newsletter input {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #FFFFFF;
+            padding: 12px 16px;
+            font-size: 13px;
+            outline: none;
+        }
+
+        .milton-newsletter input:focus {
+            border-color: var(--gold-accent);
+        }
+
+        .milton-newsletter button {
+            background: var(--gold-accent);
+            color: #FFFFFF;
+            border: none;
+            padding: 12px 24px;
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+
+        .milton-newsletter button:hover {
+            background: #8E6D43;
+        }
+
+        @media (max-width: 500px) {
+            .milton-newsletter form {
+                flex-direction: column;
+            }
+        }
+
+        .milton-newsletter-msg {
+            font-size: 12px;
+            margin-top: 12px;
+            min-height: 16px;
+            color: var(--gold-accent);
         }
 
         @media (max-width: 1024px) {
@@ -280,6 +355,7 @@
             <a href="/prices">{{ t.nav_prices }}</a>
             <a href="/shop">{{ t.nav_shop }}</a>
             <a href="/academy">{{ t.nav_academy }}</a>
+            <a href="/gallery">{{ 'გალერეა' if lang == 'ka' else 'Gallery' }}</a>
             <a href="/compare">{{ t.nav_compare }}</a>
             <a href="/color-match">{{ t.nav_colormatch }}</a>
             <a href="/aftercare">{{ t.club_rules }}</a>
@@ -288,7 +364,6 @@
 
         <div class="nav-right">
             <a href="{{ url_for('main.set_lang', lang_code=other_lang) }}" style="color:inherit; text-decoration:none;">{{ other_lang|upper }}</a>
-            <span>☀️</span>
             <span id="miltonCartToggle">🛍️<span id="miltonCartCount">0</span></span>
         </div>
     </header>
@@ -298,6 +373,15 @@
     </main>
 
     <footer>
+        <div class="milton-newsletter">
+            <h3>{{ t.kit_h }}</h3>
+            <p>{{ t.kit_p }}</p>
+            <form id="miltonNewsletterForm">
+                <input type="email" name="email" id="miltonNewsletterEmail" placeholder="{{ t.kit_ph }}" required>
+                <button type="submit">{{ t.kit_btn }}</button>
+            </form>
+            <p id="miltonNewsletterMsg" class="milton-newsletter-msg"></p>
+        </div>
         <p>© MILTON STUDIO. {{ 'ყველა უფლება დაცულია.' if lang == 'ka' else 'All rights reserved.' }}</p>
     </footer>
 
@@ -321,6 +405,32 @@
     </div>
 
     <script src="{{ url_for('static', filename='js/cart.js') }}"></script>
+    <script>
+        (function () {
+            var form = document.getElementById('miltonNewsletterForm');
+            if (!form) return;
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                var msg = document.getElementById('miltonNewsletterMsg');
+                fetch("{{ url_for('main.newsletter_subscribe') }}", {
+                    method: 'POST',
+                    body: new FormData(form)
+                })
+                .then(function (res) { return res.json(); })
+                .then(function (data) {
+                    if (data.ok) {
+                        msg.textContent = "{{ t.kit_ok }}";
+                        form.reset();
+                    } else {
+                        msg.textContent = "{{ t.kit_err }}";
+                    }
+                })
+                .catch(function () {
+                    msg.textContent = "{{ t.kit_err }}";
+                });
+            });
+        })();
+    </script>
     {% block extra_js %}{% endblock %}
 </body>
 </html>

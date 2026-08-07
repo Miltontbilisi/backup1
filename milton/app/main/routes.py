@@ -1,5 +1,6 @@
 import csv
 import os
+import re
 from datetime import datetime, timezone
 
 from flask import render_template, session, redirect, request, jsonify
@@ -9,6 +10,13 @@ CONTACT_LOG_PATH = os.path.join(
     os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
     'contact_submissions.csv'
 )
+
+SUBSCRIBERS_LOG_PATH = os.path.join(
+    os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
+    'subscribers.csv'
+)
+
+EMAIL_RE = re.compile(r'^[^@\s]+@[^@\s]+\.[^@\s]+$')
 
 PRODUCTS_DB = [
     {
@@ -53,9 +61,23 @@ PRODUCTS_DB = [
     }
 ]
 
+GALLERY_IMAGES = [
+    {'file': 'gallery-01.jpg', 'alt': 'Milton Studio — თმის დაგრძელების ტრანსფორმაცია'},
+    {'file': 'gallery-02.jpg', 'alt': 'Milton Studio — გლუვი, პრემიუმ ტექსტურა'},
+    {'file': 'gallery-03.jpg', 'alt': 'Milton Studio — მაქსიმალური სიგრძე და მოცულობა'},
+    {'file': 'gallery-04.jpg', 'alt': 'Milton Studio — ბუნებრივი, უხილავი გადაბმა'},
+    {'file': 'gallery-05.jpg', 'alt': 'Milton Studio — თმის დაგრძელების დეტალი'},
+    {'file': 'gallery-06.jpg', 'alt': 'Milton Studio — კმაყოფილი კლიენტი'},
+    {'file': 'gallery-07.jpg', 'alt': 'Milton Studio — Milton-ის საფირმო შედეგი'},
+    {'file': 'gallery-08.jpg', 'alt': 'Milton Studio — გლუვი, პრემიუმ ტექსტურა'},
+    {'file': 'gallery-09.jpg', 'alt': 'Milton Studio — ომბრე ტრანსფორმაცია'},
+    {'file': 'gallery-10.jpg', 'alt': 'Milton Studio — ტალღოვანი მოცულობა'},
+    {'file': 'gallery-11.jpg', 'alt': 'Milton Studio — დახვეული, მდიდრული ტექსტურა'},
+]
+
 @main_bp.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html', gallery=GALLERY_IMAGES[:6])
 
 @main_bp.route('/prices')
 def prices():
@@ -89,6 +111,26 @@ def contact_submit():
     except OSError:
         # ზოგიერთ hosting გარემოში (მაგ. serverless read-only filesystem) ჩაწერა
         # შეიძლება ვერ მოხერხდეს — მომხმარებელს მაინც ვუდასტურებთ მიღებას.
+        pass
+
+    return jsonify({'ok': True})
+
+@main_bp.route('/newsletter/subscribe', methods=['POST'])
+def newsletter_subscribe():
+    email = (request.form.get('email') or '').strip()
+
+    if not EMAIL_RE.match(email):
+        return jsonify({'ok': False, 'error': 'invalid_email'}), 400
+
+    row = [datetime.now(timezone.utc).isoformat(), email]
+    try:
+        is_new = not os.path.exists(SUBSCRIBERS_LOG_PATH)
+        with open(SUBSCRIBERS_LOG_PATH, 'a', newline='', encoding='utf-8') as f:
+            writer = csv.writer(f)
+            if is_new:
+                writer.writerow(['subscribed_at', 'email'])
+            writer.writerow(row)
+    except OSError:
         pass
 
     return jsonify({'ok': True})
@@ -134,6 +176,10 @@ def academy():
 @main_bp.route('/academy/keratin')
 def academy_keratin():
     return render_template('academy_keratin.html')
+
+@main_bp.route('/gallery')
+def gallery():
+    return render_template('gallery.html', gallery=GALLERY_IMAGES)
 
 @main_bp.route('/lang/<lang_code>')
 def set_lang(lang_code):

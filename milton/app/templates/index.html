@@ -227,6 +227,65 @@
         font-weight: 300;
     }
 
+    .gallery-preview-section {
+        padding: 120px 8%;
+        background-color: var(--dark-bg);
+    }
+
+    .gallery-preview-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-bottom: 40px;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .gallery-preview-header h2 {
+        font-family: var(--font-serif);
+        font-size: 38px;
+        font-weight: 400;
+        color: #FFFFFF;
+        margin: 0;
+    }
+
+    .gallery-preview-header a {
+        color: var(--gold-accent);
+        text-decoration: none;
+        font-size: 12px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        border-bottom: 1px solid var(--gold-accent);
+        padding-bottom: 4px;
+        white-space: nowrap;
+    }
+
+    .gallery-preview-grid {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 6px;
+    }
+
+    @media (max-width: 900px) {
+        .gallery-preview-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    .gallery-preview-item {
+        aspect-ratio: 4 / 5;
+        overflow: hidden;
+    }
+
+    .gallery-preview-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+
+    .gallery-preview-item:hover img {
+        transform: scale(1.06);
+    }
+
     .faq-editorial-section {
         padding: 120px 8%;
         background-color: #ffffff;
@@ -347,6 +406,20 @@
             </div>
         </div>
 
+    </div>
+</section>
+
+<section class="gallery-preview-section reveal">
+    <div class="gallery-preview-header">
+        <h2>{{ 'ჩვენი ნამუშევრები' if lang == 'ka' else 'Our Work' }}</h2>
+        <a href="{{ url_for('main.gallery') }}">{{ 'სრული გალერეა →' if lang == 'ka' else 'Full Gallery →' }}</a>
+    </div>
+    <div class="gallery-preview-grid">
+        {% for photo in gallery %}
+        <a href="{{ url_for('main.gallery') }}" class="gallery-preview-item">
+            <img src="{{ url_for('static', filename='images/gallery/' + photo.file) }}" alt="{{ photo.alt }}" loading="lazy">
+        </a>
+        {% endfor %}
     </div>
 </section>
 
